@@ -5,6 +5,7 @@ urlencodedParser = bodyParser.urlencoded({ extended: false });
 fs = require('fs');
 
 router.post("/orderHQ",urlencodedParser,function(req,res){
+    res.send("thomas");
     res.json(req.body);
 });
 
