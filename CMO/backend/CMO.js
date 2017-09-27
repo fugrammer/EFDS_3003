@@ -6,7 +6,7 @@ jsonParser = bodyParser.json({limit:"500mb"});
 fs = require('fs');
 
 router.post("/orderHQ",[urlencodedParser,jsonParser],function(req,res){
-    res.json(require("/Commons/response").success);
+    res.json(require("/Commons/js/response").success);
 });
 
 module.exports = router;

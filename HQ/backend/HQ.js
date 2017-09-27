@@ -16,7 +16,7 @@ var crisisSchema = new Schema({
 var Crisis = mongoose.model('Crisis',crisisSchema);
 
 router.get("/", function(req, res) {
-  fs.createReadStream(__dirname + "/../views/updateCMO.html").pipe(res);
+  fs.createReadStream(__dirname + "/../views/index.html").pipe(res);
 });
 
 router.post("/updateCMO", urlencodedParser, function(req, res) {
@@ -36,7 +36,7 @@ router.post("/updateCMO", urlencodedParser, function(req, res) {
   crisis.save(function(err,dat){
     if (err) console.log ("Failed to save crisis log");
   });
-  res.json(require("../../Commons/response").success);
+  res.json(require("../../Commons/js/response").success);
 });
 
 module.exports = router;
