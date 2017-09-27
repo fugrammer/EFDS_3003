@@ -6,7 +6,7 @@ var express = require("express"),
 
 router.get("/", function(req, res) {
     console.log(123);
-    fs.createReadStream(__dirname+'/updateCMO.html').pipe(res);
+    fs.createReadStream(__dirname+'/../view/updateCMO.html').pipe(res);
 });
 
 router.post("/updateCMO",urlencodedParser,function(req,res){
