@@ -9,7 +9,7 @@ var express = require("express"),
   io = require("socket.io")(http);
 
 router.post("/orderHQ", [urlencodedParser, jsonParser], function(req, res) {
-  res.json(require("/Commons/js/response").success);
+  res.json(require("../../Commons/js/response").success);
   io.emit("executiveorder", "message from cmo");
 });
 
