@@ -1,0 +1,59 @@
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="../../Commons/css/uikit.min.css" />
+        <!-- <script src="js/jquery.js"></script> -->
+        <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="../../Commons/js/uikit.min.js"></script>
+        <script src="../../Commons/js/uikit-icons.min.js"></script>
+    
+    </head>
+    
+    <body>
+        <div class="uk-width-1-1 uk-container-center uk-text-center">
+            <h1 class="uk-heading-primary">HQ</h1>
+        </div>
+        <div class="uk-container">
+            <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
+                <li><a href="#">CMO Orders</a></li>
+                <li><a href="#">Update CMO</a></li>
+                <li><a href="#">Order Dept</a></li>
+                <li><a href="#">Dept Updates</a></li>
+            </ul>
+            <ul class="uk-switcher uk-margin">
+                <li>
+                    <ul class="uk-list uk-list-striped">
+                        <li>Testing</li>
+                    </ul>
+                </li>
+                <li>
+                    <form class="uk-form-horizontal uk-margin-large" id="submitUpdate" action="/HQ/updateCMO" method="post">
+                        <div class="uk-margin">
+                            <div class="uk-form-label">Crisis ID</div>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" type="text" name="crisisID" placeholder="Enter crisis ID">
+                            </div>
+                        </div>
+    
+                        <div class="uk-margin">
+                            <div class="uk-form-label">Status</div>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" name="status">
+                                            <option>On-going</option>
+                                            <option>Cleared</option>
+                                        </select>
+                            </div>
+                        </div>
+                        <div class="uk-margin" uk-margin>
+                            <button class="uk-button uk-button-default" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </li>
+                <li>TBC</li>
+                <li>TBC</li>
+            </ul>
+        </div>
+    </body>
+    
+    </html>
