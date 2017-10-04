@@ -1,5 +1,7 @@
 var HQapp = angular.module("HQ", ["ngRoute"]);
 var orders = [];
+
+// boilerplate
 HQapp.factory("socket", function($rootScope) {
   var socket = io();
   return {
@@ -30,7 +32,7 @@ HQapp.factory("socket", function($rootScope) {
 angular
   .module("HQ")
   .controller("ExecutiveOrdersController", function($scope, socket) {
-    //this.executiveorders = orders;
+    // get past orders when first opened page
     $scope.executiveorders = orders;
     $.ajax({
       type: "GET",
@@ -45,6 +47,7 @@ angular
         }
       }
     });
+    // receives new order
     socket.on("executiveorder", function(data) {
       //$scope.$apply(function() {
         UIkit.notification({
