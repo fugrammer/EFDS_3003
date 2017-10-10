@@ -43,7 +43,6 @@ angular
           $scope.$apply(function(){
             $scope.executiveorders.push(data1);
           })
-          
         }
       }
     });
@@ -61,8 +60,19 @@ angular
       // });
     });
     socket.on("executiveorderHistory", function(data) {
-        alert("message received");
-      $scope.executiveorders.push(data);
+        console.log("MESSAGE RECEIVED!");
+        $scope.executiveorders.push(data);
+        // Create an array of alphabetical characters used to label the markers.
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        locations = [
+          {lat: 1.367448, lng: 103.803256},
+          {lat: 1.35, lng: 103.803256},
+          {lat: 1.378448, lng: 103.853256}
+        ]
+        initMap();
     });
   });
   

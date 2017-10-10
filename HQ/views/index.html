@@ -1,70 +1,118 @@
 <html ng-app="HQ">
 
 <head>
-    <link rel="stylesheet" href="css/uikit.min.css" />
-    <!-- <script src="js/jquery.js"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="js/uikit.min.js"></script>
-    <script src="js/uikit-icons.min.js"></script>
-    <style>
-        .ng-cloak {
-            display: none !important;
-        }
-    </style>
+  <link rel="stylesheet" href="css/uikit.min.css" />
+  <!-- <script src="js/jquery.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="js/uikit.min.js"></script>
+  <script src="js/uikit-icons.min.js"></script>
+  <style>
+    .ng-cloak {
+      display: none !important;
+    }
+
+    #map {
+      height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    /* html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      } */
+  </style>
 
 </head>
 
 <body ng-controller="ExecutiveOrdersController as eoc">
-    <div class="uk-width-1-1 uk-container-center uk-text-center">
-        <h1 class="uk-heading-primary">HQ</h1>
+  <div class="uk-width-1-1 uk-container-center uk-text-center">
+    <h1 class="uk-heading-primary">HQ</h1>
+  </div>
+
+  <div class="uk-text-center" uk-grid>
+    <div class="uk-width-1-6">
+      <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
+        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Item 2</a></li>
+        <li><a href="#">Item 3</a></li>
+        <li><a href="#">Item 4</a></li>
+        <li><a href="#">Item 5</a></li>
+      </ul>
     </div>
-    <div class="ng-cloak uk-container">
-        <ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
-            <li><a href="#">CMO Orders</a></li>
-            <li><a href="#">Update CMO</a></li>
-            <li><a href="#">Order Dept</a></li>
-            <li><a href="#">Dept Updates</a></li>
-        </ul>
-        <ul class="uk-switcher uk-margin">
-            <li>
-                <ul class="uk-list uk-list-striped">
-                    <li ng-repeat="order in executiveorders">{{order}}</li>
-                </ul>
-            </li>
-            <li>
-                <form class="uk-form-horizontal uk-margin-large" id="submitUpdate" action="/HQ/updateCMO" method="post">
+    <div class="uk-width-5-6">
+      <ul class="uk-switcher nav-class uk-margin">
+        <li>
+          <div class="ng-cloak uk-container">
+            <div id="map"></div>
+            <script>
+              function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 12,
+                  center: { lat: 1.367448, lng: 103.803256 }
+                });
+                // Create an array of alphabetical characters used to label the markers.
+                var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                // Add some markers to the map.
+                // Note: The code uses the JavaScript Array.prototype.map() method to
+                // create an array of markers based on a given "locations" array.
+                // The map() method here has nothing to do with the Google Maps API.
+                var markers = locations.map(function (location, i) {
+                  return new google.maps.Marker({
+                    position: location,
+                    label: labels[i % labels.length]
+                  });
+                });
 
-                    <div class="uk-margin">
-                        <div class="uk-form-label">Crisis ID</div>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" type="text" name="crisisID" placeholder="Enter crisis ID">
-                        </div>
-                    </div>
+                // Add a marker clusterer to manage the markers.
+                var markerCluster = new MarkerClusterer(map, markers,
+                  { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+              }
+              var locations = [
+                { lat: 1.367448, lng: 103.803256 },
+                { lat: 1.35, lng: 103.803256 },
+                { lat: 1.34, lng: 103.803256 },
+                { lat: 1.33, lng: 103.803256 },
+                { lat: 1.377448, lng: 103.803256 },
+                { lat: 1.387448, lng: 103.903256 },
+                { lat: 1.373448, lng: 103.913256 },
+                { lat: 1.375448, lng: 103.793256 },
+                { lat: 1.376448, lng: 103.823256 },
+                { lat: 1.379448, lng: 103.833256 },
+                { lat: 1.378448, lng: 103.853256 }
+              ]
+            </script>
+            <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 
-                    <div class="uk-margin">
-                        <div class="uk-form-label">Status</div>
-                        <div class="uk-form-controls">
-                            <select class="uk-select" name="status">
-                                        <option>On-going</option>
-                                        <option>Cleared</option>
-                                    </select>
-                        </div>
-                    </div>
-                    <div class="uk-margin" uk-margin>
-                        <button class="uk-button uk-button-default" type="submit">Submit</button>
-                    </div>
-                </form>
-            </li>
-            <li>TBC</li>
-            <li>TBC</li>
-        </ul>
+            </script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCB0_Lrcos1Pui3Hvk75-kDlDT1xFA8Uh0&callback=initMap">
+
+            </script>
+          </div>
+        </li>
+        <li>
+          Test2
+        </li>
+        <li>
+          Test3
+        </li>
+        <li>
+          Test4
+        </li>
+        <li>
+          Test5
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
-    <script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
-    <script src="/HQ/views/app.js"></script>
+
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
+  <script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
+  <script src="/HQ/views/app.js"></script>
 </body>
 
 </html>
