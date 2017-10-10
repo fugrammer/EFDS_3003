@@ -28,7 +28,7 @@
         </ul>
         <ul class="uk-switcher uk-margin">
             <li>
-                <ul class="uk-list uk-list-striped">
+                <ul class="uk-list uk-list-striped ng-cloak">
                     <li ng-repeat="order in executiveorders">{{order}}</li>
                 </ul>
             </li>

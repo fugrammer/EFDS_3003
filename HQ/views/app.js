@@ -1,39 +1,9 @@
 var HQapp = angular.module("HQ", ["ngRoute"]);
-var orders = [];
-
-// boilerplate
-HQapp.factory("socket", function($rootScope) {
-  var socket = io();
-  return {
-    on: function(eventName, callback) {
-      socket.on(eventName, function() {
-        var args = arguments;
-        //console.log(args);
-        $rootScope.$apply(function() {
-          callback.apply(socket, args);
-        });
-      });
-    },
-    emit: function(eventName, data, callback) {
-      socket.emit(eventName, data, function() {
-        var args = arguments;
-        $rootScope.$apply(function() {
-          if (callback) {
-            callback.apply(socket, args);
-          }
-        });
-      });
-    }
-  };
-});
-
-
-
 angular
   .module("HQ")
   .controller("ExecutiveOrdersController", function($scope, socket) {
     // get past orders when first opened page
-    $scope.executiveorders = orders;
+    $scope.executiveorders = [];
     $.ajax({
       type: "GET",
       url: "/HQ/getPastOrders",
@@ -75,6 +45,33 @@ angular
         initMap();
     });
   });
+// boilerplate
+HQapp.factory("socket", function($rootScope) {
+  var socket = io();
+  return {
+    on: function(eventName, callback) {
+      socket.on(eventName, function() {
+        var args = arguments;
+        //console.log(args);
+        $rootScope.$apply(function() {
+          callback.apply(socket, args);
+        });
+      });
+    },
+    emit: function(eventName, data, callback) {
+      socket.emit(eventName, data, function() {
+        var args = arguments;
+        $rootScope.$apply(function() {
+          if (callback) {
+            callback.apply(socket, args);
+          }
+        });
+      });
+    }
+  };
+});
+
+
   
 
 

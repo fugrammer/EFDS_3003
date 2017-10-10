@@ -25,7 +25,7 @@
 
 </head>
 
-<body ng-controller="ExecutiveOrdersController as eoc">
+<body>
   <div class="uk-width-1-1 uk-container-center uk-text-center">
     <h1 class="uk-heading-primary">HQ</h1>
   </div>
@@ -33,7 +33,7 @@
   <div class="uk-text-center" uk-grid>
     <div class="uk-width-1-6">
       <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
-        <li><a href="#">Item 1</a></li>
+        <li><a href="#">Map</a></li>
         <li><a href="#">Item 2</a></li>
         <li><a href="#">Item 3</a></li>
         <li><a href="#">Item 4</a></li>
@@ -42,7 +42,7 @@
     </div>
     <div class="uk-width-5-6">
       <ul class="uk-switcher nav-class uk-margin">
-        <li>
+        <li ng-controller="MapController as MCd">
           <div class="ng-cloak uk-container">
             <div id="map"></div>
             <script>
@@ -105,10 +105,6 @@
       </ul>
     </div>
   </div>
-
-
-
-
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
   <script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
