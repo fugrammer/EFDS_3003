@@ -38,6 +38,15 @@ module.exports = function (io) {
 
   var UpdateHQ = mongoose.model("UpdateHQ", updateHQSchema);
 
+  var squadLocationSchema = new Schema({
+    Lat : Number,
+    Lon : Number,
+    Type : String,
+    ID: Number
+  }, { versionKey: false });
+
+  var SquadLocation = mongoose.model("SquadLocation", squadLocationSchema);
+
   router.get("/", function (req, res) {
     var html = fs.readFileSync(__dirname + "/../views/index.html");
     res.end(html);
@@ -45,6 +54,18 @@ module.exports = function (io) {
 
   router.get("/getPastOrders", function (req, res) {
     Crisis.find().lean().exec(function (err, data) {
+      res.json(data);
+    });
+  });
+
+  router.get("/getPastUpdates", function (req, res) {
+    UpdateHQ.find().lean().exec(function (err, data) {
+      res.json(data);
+    });
+  });
+
+  router.get("/getSquadLocations", function (req, res) {
+    SquadLocation.find().lean().exec(function (err, data) {
       res.json(data);
     });
   });
@@ -90,13 +111,16 @@ module.exports = function (io) {
         return;
       }
     }
+
     var crisis = Crisis({
       crisisID: req.body.crisisID,
       status: req.body.status
     });
+
     crisis.save(function (err, dat) {
       if (err) console.log("Failed to save crisis log");
     });
+
     res.json(require("../../Commons/js/response").success);
   });
   return router;

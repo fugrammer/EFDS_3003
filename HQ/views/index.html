@@ -42,7 +42,7 @@
     </div>
     <div class="uk-width-5-6">
       <ul class="uk-switcher nav-class uk-margin">
-        <li ng-controller="MapController as MCd">
+        <li ng-controller="MapController as MC">
           <div class="ng-cloak uk-container">
             <div id="map"></div>
             <script>
@@ -52,7 +52,7 @@
                   center: { lat: 1.367448, lng: 103.803256 }
                 });
                 // Create an array of alphabetical characters used to label the markers.
-                var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                var labels = '123456789';
                 // Add some markers to the map.
                 // Note: The code uses the JavaScript Array.prototype.map() method to
                 // create an array of markers based on a given "locations" array.
@@ -109,6 +109,7 @@
   <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
   <script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
   <script src="/HQ/views/app.js"></script>
+  <script src="/HQ/views/mapcontroller.js"></script>
 </body>
 
 </html>
