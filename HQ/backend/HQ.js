@@ -70,6 +70,19 @@ module.exports = function (io) {
     });
   });
 
+  router.get("/initialiseSquadLocations",function (req,res){
+    id = 0;
+    for (id=0;id<10;id++){
+      var squadLocation = SquadLocation({
+        Lat : 1.367448,
+        Lon : 103.803256,
+        Type : "",
+        ID: id
+      })
+      squadLocation.save(function(err,dat){});
+    }
+  })
+
   router.post("/orderHQ", [urlencodedParser, jsonParser], function (req, res) {
     res.json(require("../../Commons/js/response").success);
     var crisis = Crisis({
@@ -95,8 +108,8 @@ module.exports = function (io) {
       "Status": req.body.Status,
       "Comments": req.body.Comments
     });
-    crisis.save(function (err, dat) {
-      if (err) console.log("Failed to save crisis log");
+    updateHQ.save(function (err, dat) {
+      if (err) console.log("Failed to save updateHQ log");
     });
     io.emit("ReceiveDepartmentUpdatesController", updateHQ);
   });
@@ -114,7 +127,8 @@ module.exports = function (io) {
 
     var crisis = Crisis({
       crisisID: req.body.crisisID,
-      status: req.body.status
+      status: req.body.status,
+      description :req.body.description
     });
 
     crisis.save(function (err, dat) {

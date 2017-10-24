@@ -2,35 +2,33 @@ angular
 .module("HQ")
 .controller("MapController", function($scope, socket) {
   // get past orders when first opened page
-  $scope.executiveorders = [];
+  locations = [];
+  console.log("loading map");
   $.ajax({
     type: "GET",
     url: "/HQ/getSquadLocations",
     success: function(data) {
       console.log(data);
-      for (let data1 of data){
+      locations = [];
+      for (let location of data){
         $scope.$apply(function(){
-          $scope.executiveorders.push(data1);
+          locations.push({
+            lat:location.Lat,
+            lng:location.Lon
+          });
         })
       }
+      initMap();
     }
   });
 
   // receives new squad locations
   socket.on("squadlocations", function(data) {
-      locations = []
+      $scope.locations = [];
       console.log(data)
       for (let location of data){
-        locations.push({
-            lat:location.Lat,
-            lng:location.Lon
-        })
+        locations.push()
       }
       initMap();
-  });
-
-  socket.on("executiveorderHistory", function(data) {
-      console.log("MESSAGE RECEIVED!");
-      $scope.executiveorders.push(data);
   });
 });
