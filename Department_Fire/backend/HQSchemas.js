@@ -1,9 +1,13 @@
+var mongoose = require("mongoose"),
+    Schema = mongoose.Schema;
+
 var crisisSchema = new Schema({
     CrisisID: Number,
     PlanID: Number,
     CrisisType: String,
     Lat: Number,
     Lon: Number,
+    Statis: String,
     Description: String,
     SuggestedActions: [{
         "DepartmentType": String,
@@ -27,7 +31,13 @@ var squadLocationSchema = new Schema({
     Lat: Number,
     Lon: Number,
     Type: String,
-    ID: Number
+    ID: String
 }, { versionKey: false });
 
 var SquadLocation = mongoose.model("SquadLocation", squadLocationSchema);
+
+//Orders from/to CMO
+module.exports.Crisis = Crisis;
+//Updates from Dept 
+module.exports.UpdateHQ = UpdateHQ;
+module.exports.SquadLocation = SquadLocation;
