@@ -1,5 +1,5 @@
 module.exports = function (io) {
-  var express = require("express"),
+    var express = require("express"),
     app = express(),
     router = express.Router(),
     bodyParser = require("body-parser"),
@@ -7,14 +7,15 @@ module.exports = function (io) {
     jsonParser = bodyParser.json({ limit: "500mb" }),
     fs = require("fs"),
     mongoose = require("mongoose"),
-    Schema = mongoose.Schema,
-    HQSchemas = require("./HQSchemas");
+    Schema = mongoose.Schema;
+   //HQSchemas = require("./DeptFireSchemas");
 
   mongoose.connect(
     "mongodb://fugrammer:efds123password@ds151544.mlab.com:51544/efds_database"
   );
 
   router.get("/", function (req, res) {
+    console.log("hello");
     var html = fs.readFileSync(__dirname + "/../views/index.html");
     res.end(html);
   });

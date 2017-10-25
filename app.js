@@ -11,7 +11,7 @@ app.use('/HQ/views', express.static(__dirname + '/HQ/views'));
 router.use(express.static("./Commons"))
 
 router.use("/HQ", require("./HQ/backend/HQ")(io));
-router.use("/CMO", require("./CMO/backend/CMO"));
+router.use("/Department_Fire", require("./Department_Fire/backend/DeptFire")(io));
 
 router.get("/", function(req, res) {
   res.redirect("/HQ");
