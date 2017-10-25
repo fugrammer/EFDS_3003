@@ -34,8 +34,8 @@
     <div class="uk-width-1-6">
       <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
         <li><a href="#">Map</a></li>
-        <li><a href="#">Item 2</a></li>
-        <li><a href="#">Item 3</a></li>
+        <li><a href="#">CMO Orders</a></li>
+        <li><a href="#">Dept Updates</a></li>
         <li><a href="#">Item 4</a></li>
         <li><a href="#">Item 5</a></li>
       </ul>
@@ -91,10 +91,36 @@
           </div>
         </li>
         <li>
-          Test2
+          <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
+            <li ng-repeat="order in CMOOrders">
+              <h3 class="uk-accordion-title">Crisis ID: {{order.CrisisID}}</h3>
+              <div class="uk-accordion-content">
+                <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
+                    <ul class ="uk-list">
+                        <li>Crisis Type: {{order.CrisisType}}</li>
+                        <li>Description of Case: {{order.DescriptionOfCase}}</li>
+                        <li>Location: {{order.Location}}</li>
+                        <li  ng-repeat"suborder in order.suggestedaction">Suggested Action:
+                          <ul class ="uk-list">
+                            <li>Department Type: {{suborder.DepartmentType}}</li>
+                            <li>Severity Rating: {{suborder.SeverityRating}}</li>
+                          </ul>
+                        </li>
+                        <li>Point of Contact: {{PointOfContact}}</li>
+                    </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
-        <li>
-          Test3
+        <li ng-repeat="update in deptUpdates">
+          <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin">
+              <h3 class="uk-card-title">Crisis ID: {{update.CrisisID}}</h3>
+              <ul class = "uk-list">
+                  <li>Status: {{update.Status}}</li>
+                  <li>Comments: {{update.Comments}}</li>
+              </ul>
+          </div>
         </li>
         <li>
           Test4
