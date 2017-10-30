@@ -55,15 +55,12 @@ module.exports = function (io) {
     });
   });
 
-  router.get("/getSquadLocations", function (req, res) {
-    // HQSchemas.SquadLocation.find().lean().exec(function (err, data) {
-    //   res.json(data);
-    // });
+  router.get("/getLocations", function (req, res) {
 
     HQSchemas.DepartmentDB.find().lean().exec(function (err, data) {
       result = [];
       for (var _data of data) {
-        if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going" ) {
+        if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {
           result.push(_data);
         }
       }
@@ -125,15 +122,15 @@ module.exports = function (io) {
       SuggestedActions: req.body.SuggestedActions,
       PointOfContact: req.body.PointOfContact
     });
-    
-    var crisisLocation = HQSchemas.DepartmentDB({
-      Lat: req.body.Lat,
-      Lon: req.body.Lon,
-      DepartmentID: "Crisis",
-      SquadID: req.body.CrisisID.toString(),
-      CrisisType: req.body.CrisisType,
-      SquadStatus: req.body.Status
-    });
+
+    // var crisisLocation = HQSchemas.DepartmentDB({
+    //   Lat: req.body.Lat,
+    //   Lon: req.body.Lon,
+    //   DepartmentID: "Crisis",
+    //   SquadID: req.body.CrisisID.toString(),
+    //   CrisisType: req.body.CrisisType,
+    //   SquadStatus: req.body.Status
+    // });
 
     newData = {
       Lat: req.body.Lat,
@@ -146,20 +143,19 @@ module.exports = function (io) {
 
     /* Share DB with DepartmentDB lazy */
     /* Change both to update or create */
-    var query = {DepartmentID:"Crisis",SquadID:req.body.CrisisID.toString()};
-    HQSchemas.DepartmentDB.findOneAndUpdate(query,newData, {upsert:true}, function(err, doc){
-        if (err) {
-          console.log("Failed to save squad update");
-        } else{
-          console.log("Saved squad update");
-        }
+    var query = { DepartmentID: "Crisis", SquadID: req.body.CrisisID.toString() };
+    HQSchemas.DepartmentDB.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
+      if (err) {
+        console.log("Failed to save squad update");
+      } else {
+        console.log("Saved squad update");
+      }
     });
 
     crisis.save(function (err, dat) {
       if (err) console.log("Failed to save crisis log to crisis db");
     });
 
-    io.emit("UpdateOrderMap", crisisLocation);
     io.emit("ReceiveCMOOrder", crisis);
     res.end("success");
   });
@@ -187,7 +183,16 @@ module.exports = function (io) {
         return;
       }
     }
-
+    /* Change to
+      var salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');;
+      var newPassword = this.hashPassword("someNew password");
+      User.update({_id: idd}, {
+          info: "some new info", 
+          password: newPassword
+      }, function(err, affected, resp) {
+        console.log(resp);
+      })
+    */
     var crisis = HQSchemas.Crisis({
       crisisID: req.body.crisisID,
       status: req.body.status,

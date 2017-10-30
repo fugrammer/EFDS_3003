@@ -16,7 +16,7 @@ function updateMap() {
   console.log("loading map");
   $.ajax({
     type: "GET",
-    url: "/HQ/getSquadLocations",
+    url: "/HQ/getLocations",
     success: function (data) {
       if (markerCluster) {
         markerCluster.clearMarkers();
@@ -70,7 +70,7 @@ angular
     console.log("loading map");
     $.ajax({
       type: "GET",
-      url: "/HQ/getSquadLocations",
+      url: "/HQ/getLocations",
       success: function (data) {
           updateMap();
         }
@@ -89,7 +89,7 @@ angular
     // });
 
     // receives new squad locations
-    socket.on("UpdateOrderMap", function (data) {
+    socket.on("ReceiveCMOOrder", function (data) {
       updateMap();
     });
 
