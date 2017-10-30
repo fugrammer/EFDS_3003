@@ -7,7 +7,7 @@ var crisisSchema = new Schema({
     CrisisType: String,
     Lat: Number,
     Lon: Number,
-    Statis: String,
+    Status: String,
     Description: String,
     SuggestedActions: [{
         "DepartmentType": String,
@@ -31,13 +31,25 @@ var squadLocationSchema = new Schema({
     Lat: Number,
     Lon: Number,
     Type: String,
-    ID: String
+    ID: String,
+    CrisisType: String
 }, { versionKey: false });
 
 var SquadLocation = mongoose.model("SquadLocation", squadLocationSchema);
+
+var departmentDBSchema = new Schema({
+    DepartmentID : String,
+    SquadID: String,
+    SquadStatus: String, // Active, Inactive, Unavailable
+    CrisisType: String,    
+    Lat: Number,
+    Lon: Number}, { versionKey: false });
+
+var DepartmentDB = mongoose.model("DepartmentDB", departmentDBSchema);
 
 //Orders from/to CMO
 module.exports.Crisis = Crisis;
 //Updates from Dept 
 module.exports.UpdateHQ = UpdateHQ;
 module.exports.SquadLocation = SquadLocation;
+module.exports.DepartmentDB = DepartmentDB;
