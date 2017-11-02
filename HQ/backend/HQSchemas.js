@@ -37,10 +37,22 @@ var UpdateHQ = mongoose.model("UpdateHQ", updateHQSchema);
 
 // var SquadLocation = mongoose.model("SquadLocation", squadLocationSchema);
 
+//Added by sw
+var departmentOrderSchema = new Schema({
+    DepartmentID : String,
+    SquadID: String,
+    Lat: Number,
+    Lon: Number,
+    CrisisID: Number,
+    Severity: Number,
+    Comments: String
+  }, { versionKey: false });
+
+var DepartmentOrder = mongoose.model("DepartmentOrder", departmentOrderSchema);
 
 //Orders from/to CMO
 module.exports.Crisis = Crisis;
-//Updates from Dept 
+//Updates from Dept
 module.exports.UpdateHQ = UpdateHQ;
 // module.exports.SquadLocation = SquadLocation;
 //module.exports.DepartmentDB = DepartmentDB;

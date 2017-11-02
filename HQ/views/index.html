@@ -36,7 +36,7 @@
         <li><a href="#">Map</a></li>
         <li><a href="#">CMO Orders</a></li>
         <li><a href="#">Dept Updates</a></li>
-        <li><a href="#">Item 4</a></li>
+        <li><a href="#">Send Order to Department</a></li>
         <li><a href="#">Item 5</a></li>
       </ul>
     </div>
@@ -126,7 +126,71 @@
           Test4
         </li>
         <li>
-          Test5
+          <!--Send orders to HQ-->
+            <form class="uk-form-horizontal uk-margin-large" id="submitUpdate" action="/HQ/updateCMO" method="post">
+
+              <div class="uk-margin">
+                  <div class="uk-form-label">Department</div>
+                  <div class="uk-form-controls">
+                      <select class="uk-select" name="status">
+                                  <option>Emergency Medical Services Department</option>
+                                  <option>Counter Terrorism Department</option>
+                                  <option>Urban Search & Rescue Department</option>
+                                  <option>Civilian Evacuation Department</option>
+                                  <option>Infectious Disease Quarantine Department</option>
+                                  <option>Firefighting Department</option>
+                                  <option>Bomb Disposal Department</option>
+                                  <option>Hazmat Department</option>
+                              </select>
+                  </div>
+              </div>
+              <div class="uk-margin">
+                  <div class="uk-form-label">Squad(s) needed</div>
+                  <div class="uk-form-controls">
+                      <select class="uk-select" name="status">
+                                  <option>0</option>
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                              </select>
+                  </div>
+              </div>
+              <div class="uk-margin">
+                  <div class="uk-form-label">Location</div>
+                  <div class="uk-form-controls">
+                      <input class="uk-input" type="text" name="crisisID" placeholder="Enter Location">
+                  </div>
+              </div>
+                <div class="uk-margin">
+                    <div class="uk-form-label">Crisis ID</div>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" name="status">
+                                    <option>Placeholder 001</option>
+                                    <option>Placeholder 002</option>
+                                </select>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-form-label">Severity</div>
+                    <div class="uk-form-controls">
+                        <select class="uk-select" name="status">
+                                    <option>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <div class="uk-form-label">Comments</div>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="crisisID" placeholder="Enter Comments">
+                    </div>
+                </div>
+                <div class="uk-margin" uk-margin>
+                    <button class="uk-button uk-button-default" type="submit">Submit</button>
+                </div>
+            </form>
         </li>
       </ul>
     </div>
