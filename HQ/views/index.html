@@ -98,15 +98,15 @@
                 <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
                     <ul class ="uk-list">
                         <li>Crisis Type: {{order.CrisisType}}</li>
-                        <li>Description of Case: {{order.DescriptionOfCase}}</li>
-                        <li>Location: {{order.Location}}</li>
-                        <li  ng-repeat"suborder in order.suggestedaction">Suggested Action:
+                        <li>Description of Case: {{order.Description}}</li>
+                        <li>Location: {{order.Lat}}</li>
+                        <li  ng-repeat"suborder in order.SuggestedActions">Suggested Action:
                           <ul class ="uk-list">
                             <li>Department Type: {{suborder.DepartmentType}}</li>
                             <li>Severity Rating: {{suborder.SeverityRating}}</li>
                           </ul>
                         </li>
-                        <li>Point of Contact: {{PointOfContact}}</li>
+                        <li>Point of Contact: {{order.PointOfContact}}</li>
                     </ul>
                 </div>
               </div>
