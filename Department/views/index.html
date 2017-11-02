@@ -1,0 +1,174 @@
+<html ng-app="HQ">
+
+<head>
+    <link rel="stylesheet" href="css/uikit.min.css"/>
+    <!-- <script src="js/jquery.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+    <style>
+        .ng-cloak {
+            display: none !important;
+        }
+
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        /* html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          } */
+    </style>
+
+</head>
+
+<body>
+<div class="uk-width-1-1 uk-container-center uk-text-center">
+    <h1 class="uk-heading-primary">Department of Ambulance</h1>
+</div>
+
+<div class="uk-text-center" uk-grid>
+    <div class="uk-width-1-6">
+        <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
+            <li><a href="#">HQ Orders</a></li>
+            <li><a href="#">Update HQ</a></li>
+            <li><a href="#">Order Squad</a></li>
+            <li><a href="#">Squad Updates</a></li>
+        </ul>
+    </div>
+    <div class="uk-width-5-6">
+        <ul class="uk-switcher nav-class uk-margin">
+            <li>HQ Orders</li>
+            <li>
+                <form class="uk-form-horizontal uk-margin-large">
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-department">Department</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" id="form-department">
+                                <option>Ambulance</option>
+                                <option>Bomb Disposal</option>
+                                <option>Civil Evacuation</option>
+                                <option>Coast Guard</option>
+                                <option>Emergency Traffic Control</option>
+                                <option>Firefighting</option>
+                                <option>HAZMAT</option>
+                                <option>Infectious Disease Quarantine</option>
+                                <option>Military</option>
+                                <option>Search and Rescue</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-squad">Squad No.</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-squad" type="text" placeholder="Squad number...">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-long">Longitude</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-long" type="text" placeholder="long...">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-latitude">Latitude</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-latitude" type="text" placeholder="lat...">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-task">Task ID</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-task" type="text" placeholder="Task id...">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-status">Task Status</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" id="form-status">
+                                <option>Clean</option>
+                                <option>Not Clean</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-description">Description</label>
+                        <div class="uk-form-controls">
+                    <textarea class="uk-textarea" id="form-description" rows="5"
+                              placeholder="Task description..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin" uk-margin>
+                        <button class="uk-button uk-button-default">Submit</button>
+                    </div>
+                </form>
+            </li>
+            <li>
+                <form class="uk-form-horizontal uk-margin-large">
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-squad">Squad No.</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-squad" type="text" placeholder="Squad number...">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-long">Longitude</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-long" type="text" placeholder="long...">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-latitude">Latitude</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-latitude" type="text" placeholder="lat...">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-task">Task ID</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" id="form-task" type="text" placeholder="Task id...">
+                        </div>
+                    </div>
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-description">Description</label>
+                        <div class="uk-form-controls">
+                    <textarea class="uk-textarea" id="form-description" rows="5"
+                              placeholder="Task description..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="uk-margin" uk-margin>
+                        <button class="uk-button uk-button-default">Order</button>
+                    </div>
+                </form>
+            </li>
+            <li>Squad Updates
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.angularjs.org/1.6.5/angular.js"></script>
+<script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
+<script src="/HQ/views/app.js"></script>
+<script src="/HQ/views/mapcontroller.js"></script>
+</body>
+
+</html>
