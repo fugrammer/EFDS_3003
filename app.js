@@ -18,7 +18,9 @@ router.use(express.static("./Commons"))
 
 router.use("/HQ", require("./HQ/backend/HQ")(io,mongoose,Schemas));
 router.use("/Department_Fire", require("./Department_Fire/backend/DeptFire")(io));
+router.use("/Squad", require("./Squad/backend/Squad")(io));
 router.use("/",require("./Commons/backend/Backend")(io,mongoose,Schemas));
+
 
 // router.get("/", function(req, res) {
 //   res.redirect("/HQ");
