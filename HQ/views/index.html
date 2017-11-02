@@ -37,7 +37,7 @@
         <li><a href="#">CMO Orders</a></li>
         <li><a href="#">Dept Updates</a></li>
         <li><a href="#">Send Order to Department</a></li>
-        <li><a href="#">Item 5</a></li>
+        <li><a href="#">Send Crisis Update</a></li>
       </ul>
     </div>
     <div class="uk-width-5-6">
@@ -191,6 +191,55 @@
                     <button class="uk-button uk-button-default" type="submit">Submit</button>
                 </div>
             </form>
+        </li>
+
+        <li>
+          <form class="uk-form-horizontal uk-margin-large" id="sendCrisisUpdate" action="/HQ/updateCMO" method="post">
+
+              <div class="uk-margin">
+                  <div class="uk-form-label">Crisis ID</div>
+                  <div class="uk-form-controls">
+                    <select class="uk-select" name="Crisis ID">
+                                <option>Placeholder 001</option>
+                                <option>Placeholder 002</option>
+                    </select>
+                  </div>
+              </div>
+
+              <div class="uk-margin">
+                  <div class="uk-form-label">Plan ID</div>
+                  <div class="uk-form-controls">
+                    <select class="uk-select" name="Crisis ID">
+                                <option>Placeholder 001</option>
+                                <option>Placeholder 002</option>
+                    </select>
+                  </div>
+              </div>
+
+              <div class="uk-margin">
+                  <div class="uk-form-label">Status</div>
+                  <div class="uk-form-controls">
+                      <select class="uk-select" name="status">
+                                  <option>On-going</option>
+                                  <option>Clean-up</option>
+                                  <option>Cleared</option>
+                              </select>
+                  </div>
+              </div>
+
+              <div class="uk-margin">
+                  <div class="uk-form-label">Description</div>
+                  <div class="uk-form-controls">
+                      <input class="uk-input" type="text" name="description" >
+                  </div>
+              </div>
+
+              <div class="uk-margin" uk-margin>
+                  <button class="uk-button uk-button-default" type="submit">Submit</button>
+              </div>
+          </form>
+
+
         </li>
       </ul>
     </div>

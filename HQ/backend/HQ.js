@@ -129,7 +129,7 @@ module.exports = function (io,mongoose,Schemas) {
         return;
       }
     }
-    
+
     var crisis = HQSchemas.Crisis({
       crisisID: req.body.crisisID,
       status: req.body.status,
