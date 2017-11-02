@@ -90,7 +90,7 @@
             </script>
           </div>
         </li>
-        <li>
+        <li ng-controller="ReceiveCMOOrdersController as RCC">
           <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
             <li ng-repeat="order in CMOOrders">
               <h3 class="uk-accordion-title">Crisis ID: {{order.CrisisID}}</h3>
@@ -113,17 +113,16 @@
             </li>
           </ul>
         </li>
-        <li ng-repeat="update in deptUpdates">
-          <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin">
-              <h3 class="uk-card-title">Crisis ID: {{update.CrisisID}}</h3>
-              <ul class = "uk-list">
-                  <li>Status: {{update.Status}}</li>
-                  <li>Comments: {{update.Comments}}</li>
-              </ul>
-          </div>
-        </li>
-        <li>
-          Test4
+        <li ng-controller="ReceiveDeptUpdatesController as RDUC">
+          <li ng-repeat="update in deptUpdates">
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin">
+                <h3 class="uk-card-title">Crisis ID: {{update.CrisisID}}</h3>
+                <ul class = "uk-list">
+                    <li>Status: {{update.Status}}</li>
+                    <li>Comments: {{update.Comments}}</li>
+                </ul>
+            </div>
+          </li>
         </li>
         <li>
           <!--Send orders to HQ-->
@@ -192,7 +191,6 @@
                 </div>
             </form>
         </li>
-
         <li>
           <form class="uk-form-horizontal uk-margin-large" id="sendCrisisUpdate" action="/HQ/updateCMO" method="post">
 
