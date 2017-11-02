@@ -1,4 +1,4 @@
-module.exports = function (io) {
+module.exports = function (io,mongoose,Schemas) {
   var express = require("express"),
     app = express(),
     router = express.Router(),
@@ -6,26 +6,13 @@ module.exports = function (io) {
     urlencodedParser = bodyParser.urlencoded({ extended: false }),
     jsonParser = bodyParser.json({ limit: "500mb" }),
     fs = require("fs"),
-    mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     HQSchemas = require("./HQSchemas");
-
-  mongoose.connect(
-    "mongodb://fugrammer:efds123password@ds151544.mlab.com:51544/efds_database"
-  );
 
   router.get("/", function (req, res) {
     var html = fs.readFileSync(__dirname + "/../views/index.html");
     res.end(html);
   });
-
-  var departmentDBSchema = new Schema({
-    DepartmentID: String,
-    SquadID: Number,
-    SquadStatus: String, // Active, Available, Unavailable
-    Lat: Number,
-    Lon: Number
-  }, { versionKey: false });
 
   /* Provide overall of HQ */
   router.get("/getStatus", function (req, res) {
@@ -56,8 +43,7 @@ module.exports = function (io) {
   });
 
   router.get("/getLocations", function (req, res) {
-
-    HQSchemas.DepartmentDB.find().lean().exec(function (err, data) {
+    Schemas.DepartmentDB.find().lean().exec(function (err, data) {
       result = [];
       for (var _data of data) {
         if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {
@@ -68,46 +54,6 @@ module.exports = function (io) {
     });
 
   });
-
-  /* Use during testing only */
-  router.get("/initialiseSquadLocations", function (req, res) {
-    var departmentDBSchema = new Schema({
-      DepartmentID: String,
-      SquadID: Number,
-      SquadStatus: String, // Active, Available, Unavailable
-      Lat: Number,
-      Lon: Number
-    }, { versionKey: false });
-
-    var departments = ["Fire", "Water", "Earth"];
-    variance = 0;
-    for (var department of departments) {
-      for (id = 0; id < 5; id++) {
-        variance += 0.01
-        var departmentDB = HQSchemas.DepartmentDB({
-          DepartmentID: department,
-          SquadID: id.toString(),
-          SquadStatus: "Active",
-          Lat: 1.367448 + variance,
-          Lon: 103.803256 + variance,
-          CrisisType: ""
-        });
-
-        departmentDB.save(function (err, data) { });
-
-        // var squadLocation = HQSchemas.SquadLocation({
-        //   Lat : 1.367448,
-        //   Lon : 103.803256,
-        //   Type : "",
-        //   ID: id.toString()
-        // })
-
-        // squadLocation.save(function(err,dat){});
-      }
-    }
-    res.end("success");
-  })
-
 
   /* Order below and receive update from below, and receive order from above and update above */
   router.post("/orderHQ", [urlencodedParser, jsonParser], function (req, res) {
@@ -183,16 +129,7 @@ module.exports = function (io) {
         return;
       }
     }
-    /* Change to
-      var salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');;
-      var newPassword = this.hashPassword("someNew password");
-      User.update({_id: idd}, {
-          info: "some new info", 
-          password: newPassword
-      }, function(err, affected, resp) {
-        console.log(resp);
-      })
-    */
+    
     var crisis = HQSchemas.Crisis({
       crisisID: req.body.crisisID,
       status: req.body.status,

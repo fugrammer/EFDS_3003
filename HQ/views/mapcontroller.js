@@ -1,5 +1,6 @@
 var map;
 var markerCluster;
+let GETLOCATIONSURL = "/getLocations"
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -16,7 +17,7 @@ function updateMap() {
   console.log("loading map");
   $.ajax({
     type: "GET",
-    url: "/HQ/getLocations",
+    url: GETLOCATIONSURL,
     success: function (data) {
       if (markerCluster) {
         markerCluster.clearMarkers();
@@ -70,25 +71,23 @@ angular
     console.log("loading map");
     $.ajax({
       type: "GET",
-      url: "/HQ/getLocations",
+      url: GETLOCATIONSURL,
       success: function (data) {
           updateMap();
         }
       });
 
-    // receives new squad locations
-    // socket.on("ReceiveSquadLocationUpdates", function (data) {
-    //   console.log(data)
-    //   for (let location of locations) {
-    //     if (location.DepartmentID === data.DepartmentID && location.SquadID === data.SquadID) {
-    //       location = data;
-    //       break;
-    //     }
-    //   }
-    //   updateMap();
-    // });
+    // receives new squad locations (maybe)
+    socket.on("ReceiveLocationsUpdates", function (data) {
+      updateMap();
+    });
 
-    // receives new squad locations
+    // receives new squad locations (maybe)
+    socket.on("ReceiveDepartmentUpdates", function (data) {
+      updateMap();
+    });
+
+    // receives new crisis locations (maybe)
     socket.on("ReceiveCMOOrder", function (data) {
       updateMap();
     });
