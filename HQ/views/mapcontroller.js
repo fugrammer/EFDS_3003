@@ -87,6 +87,10 @@ angular
       updateMap();
     });
 
+    socket.on("UpdateMap", function (data) {
+      updateMap();
+    });
+
     // receives new crisis locations (maybe)
     socket.on("ReceiveCMOOrder", function (data) {
       updateMap();

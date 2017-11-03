@@ -29,7 +29,7 @@ module.exports = function (mongoose) {
     //Added by sw
     var departmentOrderSchema = new Schema({
         DepartmentID: String,
-        SquadID: String,
+        NumberOfSquads: String,
         Lat: Number,
         Lon: Number,
         CrisisID: Number,
@@ -38,23 +38,24 @@ module.exports = function (mongoose) {
     }, { versionKey: false });
 
     var squadOrderSchema = new Schema({
-        "CrisisID": Number,
-        "Status": String,
-        "Comments": String
+        CrisisID: Number,
+        Status: String,
+        Comments: String
     }, { versionKey: false });
 
     var updateHQSchema = new Schema({
-        "Crisis ID": Number,
-        "Status": String,
-        "Comments": String
+        CrisisID: Number,
+        Status: String,
+        Comments: String
     }, { versionKey: false });
 
     var updateDeptSchema = new Schema({
-        "CrisisID": Number,
-        "Status": String,
-        "Comments": String,
-        "Lat": Number,
-        "Lon": Number
+        SquadID : Number,
+        CrisisID: Number,
+        Status: String,
+        Comments: String,
+        Lat: Number,
+        Lon: Number
     }, { versionKey: false });
 
     var models = {

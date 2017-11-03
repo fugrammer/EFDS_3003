@@ -129,16 +129,23 @@ module.exports = function (io,mongoose,Schemas) {
       }
     }
 
-    var crisis = Schemas.Crisis({
-      crisisID: req.body.crisisID,
-      status: req.body.status,
-      description: req.body.description
+    newData = {
+      SquadStatus: req.body.Status
+    }
+
+    /* Share DB with DepartmentDB lazy */
+    /* Change both to update or create */
+    var query = { DepartmentID: "Crisis", SquadID: req.body.CrisisID.toString() };
+    Schemas.DepartmentDB.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
+      if (err) {
+        console.log("Failed to save squad update");
+      } else {
+        console.log("Saved squad update");
+      }
     });
 
-    crisis.save(function (err, dat) {
-      if (err) console.log("Failed to save crisis log");
-    });
-
+    io.emit("UpdateMap");
+    
     res.json(require("../../Commons/js/response").success);
   });
 
