@@ -13,11 +13,12 @@ mongoose.connect(
 
 //app.use(express.static("Commons"));
 app.use('/HQ/views', express.static(__dirname + '/HQ/views'));
+app.use('/DeptFire/views', express.static(__dirname + '/DeptFire/views'));
 
 router.use(express.static("./Commons"))
 
 router.use("/HQ", require("./HQ/backend/HQ")(io,mongoose,Schemas));
-router.use("/Department_Fire", require("./Department_Fire/backend/DeptFire")(io,mongoose,Schemas));
+router.use("/DeptFire", require("./DeptFire/backend/DeptFire")(io,mongoose,Schemas));
 router.use("/Squad", require("./Squad/backend/Squad")(io));
 router.use("/",require("./Commons/backend/Backend")(io,mongoose,Schemas));
 

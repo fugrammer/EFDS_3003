@@ -63,7 +63,7 @@ var crisisImage = {
 };
 
 angular
-  .module("HQ")
+  .module("DeptFire")
   .controller("MapController", function ($scope, socket) {
     // get past orders when first opened page
     //updateMap();
