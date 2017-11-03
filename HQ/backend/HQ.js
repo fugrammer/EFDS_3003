@@ -6,8 +6,7 @@ module.exports = function (io,mongoose,Schemas) {
     urlencodedParser = bodyParser.urlencoded({ extended: false }),
     jsonParser = bodyParser.json({ limit: "500mb" }),
     fs = require("fs"),
-    Schema = mongoose.Schema,
-    HQSchemas = require("./HQSchemas");
+    Schema = mongoose.Schema;
 
   router.get("/", function (req, res) {
     var html = fs.readFileSync(__dirname + "/../views/index.html");
@@ -17,7 +16,7 @@ module.exports = function (io,mongoose,Schemas) {
   /* Provide overall of HQ */
   router.get("/getStatus", function (req, res) {
     var departmentStatus = {}
-    HQSchemas.DepartmentDB.find().lean().exec(function (err, data) {
+    Schemas.DepartmentDB.find().lean().exec(function (err, data) {
       for (var _data of data) {
         departmentStatus[_data.DepartmentID] = departmentStatus[_data.DepartmentID] || { max: 0, available: 0 };
         departmentStatus[_data.DepartmentID].max += 1;
@@ -31,13 +30,13 @@ module.exports = function (io,mongoose,Schemas) {
 
   /* When app first loaded */
   router.get("/getPastOrders", function (req, res) {
-    HQSchemas.Crisis.find().lean().exec(function (err, data) {
+    Schemas.Crisis.find().lean().exec(function (err, data) {
       res.json(data);
     });
   });
 
   router.get("/getPastUpdates", function (req, res) {
-    HQSchemas.UpdateHQ.find().lean().exec(function (err, data) {
+    Schemas.UpdateHQ.find().lean().exec(function (err, data) {
       res.json(data);
     });
   });
@@ -57,7 +56,7 @@ module.exports = function (io,mongoose,Schemas) {
 
   /* Order below and receive update from below, and receive order from above and update above */
   router.post("/orderHQ", [urlencodedParser, jsonParser], function (req, res) {
-    var crisis = HQSchemas.Crisis({
+    var crisis = Schemas.Crisis({
       CrisisID: req.body.CrisisID,
       PlanID: req.body.PlanID,
       CrisisType: req.body.CrisisType,
@@ -90,7 +89,7 @@ module.exports = function (io,mongoose,Schemas) {
     /* Share DB with DepartmentDB lazy */
     /* Change both to update or create */
     var query = { DepartmentID: "Crisis", SquadID: req.body.CrisisID.toString() };
-    HQSchemas.DepartmentDB.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
+    Schemas.DepartmentDB.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
       if (err) {
         console.log("Failed to save squad update");
       } else {
@@ -108,7 +107,7 @@ module.exports = function (io,mongoose,Schemas) {
 
   router.post("/updateHQ", [urlencodedParser, jsonParser], function (req, res) {
     res.json(require("../../Commons/js/response").success);
-    var updateHQ = HQSchemas.UpdateHQ({
+    var updateHQ = Schemas.UpdateHQ({
       "CrisisID": req.body.CrisisID,
       "Status": req.body.Status,
       "Comments": req.body.Comments
@@ -130,7 +129,7 @@ module.exports = function (io,mongoose,Schemas) {
       }
     }
 
-    var crisis = HQSchemas.Crisis({
+    var crisis = Schemas.Crisis({
       crisisID: req.body.crisisID,
       status: req.body.status,
       description: req.body.description
