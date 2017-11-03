@@ -18,7 +18,7 @@ angular
       }
     });
     // receives new order
-    socket.on("CMOOrders", function(data) {
+    socket.on("ReceiveCMOOrder", function(data) {
       //$scope.$apply(function() {
         UIkit.notification({
           message: "New order received!",
@@ -58,7 +58,7 @@ angular
     socket.on("deptUpdates", function(data) {
       //$scope.$apply(function() {
         UIkit.notification({
-          message: "New order received!",
+          message: "New updates received!",
           status: "primary",
           pos: "top-right",
           timeout: 10000
