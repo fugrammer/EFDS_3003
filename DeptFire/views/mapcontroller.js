@@ -1,6 +1,6 @@
 var map;
 var markerCluster;
-let GETLOCATIONSURL = "/getLocations?id=DeptFire"
+let GETLOCATIONSURL = "/getLocations?id=Fire"
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {

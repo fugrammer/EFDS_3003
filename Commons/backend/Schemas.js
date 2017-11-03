@@ -44,11 +44,18 @@ module.exports = function (mongoose) {
         Comments: String
     }, { versionKey: false });
 
+    var updateDeptSchema = new Schema({
+        "CrisisID": Number,
+        "Status": String,
+        "Comments": String
+    }, { versionKey: false });
+
     var models = {
         DepartmentDB: mongoose.model("DepartmentDB", departmentDBSchema),
         Crisis: mongoose.model("Crisis", crisisSchema),
         UpdateHQ: mongoose.model("UpdateHQ", updateHQSchema),
-        DepartmentOrder: mongoose.model("DepartmentOrder", departmentOrderSchema)
+        DepartmentOrder: mongoose.model("DepartmentOrder", departmentOrderSchema),
+        UpdateDept : mongoose.model("UpdateDept", updateDeptSchema)
     };
     
     return models;

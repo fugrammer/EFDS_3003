@@ -10,8 +10,8 @@ module.exports = function (io, mongoose, Schemas) {
 
     router.get("/getLocations", function (req, res) {
         console.log("Getting locations");
-        console.log(`Parameters are ${req.params}`);
-        if (req.params.id=="HQ" || req.params.id == null){
+        console.log(`Parameters are ${req.query.id}`);
+        if (req.query.id=="HQ" || req.query.id == null){
             Schemas.DepartmentDB.find().lean().exec(function (err, data) {
                 result = [];
                 for (var _data of data) {
@@ -23,7 +23,7 @@ module.exports = function (io, mongoose, Schemas) {
             });
         }   
         else {
-            var filter = {DepartmentID:req.params.id}
+            var filter = {$or:[{DepartmentID:req.query.id},{DepartmentID:"Crisis"}]}
             Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
                 result = [];
                 for (var _data of data) {
