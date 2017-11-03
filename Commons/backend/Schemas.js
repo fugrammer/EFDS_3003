@@ -26,13 +26,6 @@ module.exports = function (mongoose) {
         PointOfContact: String
     }, { versionKey: false });
 
-
-    var updateHQSchema = new Schema({
-        "Crisis ID": Number,
-        "Status": String,
-        "Comments": String
-    }, { versionKey: false });
-
     //Added by sw
     var departmentOrderSchema = new Schema({
         DepartmentID: String,
@@ -44,10 +37,24 @@ module.exports = function (mongoose) {
         Comments: String
     }, { versionKey: false });
 
-    var updateDeptSchema = new Schema({
+    var squadOrderSchema = new Schema({
         "CrisisID": Number,
         "Status": String,
         "Comments": String
+    }, { versionKey: false });
+
+    var updateHQSchema = new Schema({
+        "Crisis ID": Number,
+        "Status": String,
+        "Comments": String
+    }, { versionKey: false });
+
+    var updateDeptSchema = new Schema({
+        "CrisisID": Number,
+        "Status": String,
+        "Comments": String,
+        "Lat": Number,
+        "Lon": Number
     }, { versionKey: false });
 
     var models = {
@@ -55,7 +62,8 @@ module.exports = function (mongoose) {
         Crisis: mongoose.model("Crisis", crisisSchema),
         UpdateHQ: mongoose.model("UpdateHQ", updateHQSchema),
         DepartmentOrder: mongoose.model("DepartmentOrder", departmentOrderSchema),
-        UpdateDept : mongoose.model("UpdateDept", updateDeptSchema)
+        UpdateDept : mongoose.model("UpdateDept", updateDeptSchema),
+        SquadOrder : mongoose.model("SquadOrder",squadOrderSchema)
     };
     
     return models;
