@@ -9,6 +9,8 @@ module.exports = function (io, mongoose, Schemas) {
         Schema = mongoose.Schema;
 
     router.get("/getLocations", function (req, res) {
+        console.log("Getting locations");
+        console.log(`Parameters are ${req.params}`);
         if (req.params.id=="HQ" || req.params.id == null){
             Schemas.DepartmentDB.find().lean().exec(function (err, data) {
                 result = [];
