@@ -1,6 +1,6 @@
 var map;
 var markerCluster;
-let GETLOCATIONSURL = "/getLocations"
+let GETLOCATIONSURL = "/getLocations?id=DeptFire"
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -83,12 +83,12 @@ angular
     });
 
     // receives new squad locations (maybe)
-    socket.on("ReceiveDepartmentUpdates", function (data) {
+    socket.on("ReceiveSquadUpdates", function (data) {
       updateMap();
     });
 
     // receives new crisis locations (maybe)
-    socket.on("ReceiveCMOOrder", function (data) {
+    socket.on("ReceiveHQOrder", function (data) {
       updateMap();
     });
 

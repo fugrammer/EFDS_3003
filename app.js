@@ -17,7 +17,7 @@ app.use('/HQ/views', express.static(__dirname + '/HQ/views'));
 router.use(express.static("./Commons"))
 
 router.use("/HQ", require("./HQ/backend/HQ")(io,mongoose,Schemas));
-router.use("/Department_Fire", require("./Department_Fire/backend/DeptFire")(io));
+router.use("/Department_Fire", require("./Department_Fire/backend/DeptFire")(io,mongoose,Schemas));
 router.use("/Squad", require("./Squad/backend/Squad")(io));
 router.use("/",require("./Commons/backend/Backend")(io,mongoose,Schemas));
 

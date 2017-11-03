@@ -6,15 +6,15 @@ module.exports = function (io,mongoose,Schemas) {
     urlencodedParser = bodyParser.urlencoded({ extended: false }),
     jsonParser = bodyParser.json({ limit: "500mb" }),
     fs = require("fs"),
-    Schema = mongoose.Schema,
-    HQSchemas = require("./HQSchemas");
+    Schema = mongoose.Schema;
+    // HQSchemas = require("./HQSchemas");
 
   router.get("/", function (req, res) {
     var html = fs.readFileSync(__dirname + "/../views/index.html");
     res.end(html);
   });
 
-  /* Provide overall of HQ */
+  /* Provide overall of DeptFire */
   router.get("/getStatus", function (req, res) {
     var departmentStatus = {}
     HQSchemas.DepartmentDB.find().lean().exec(function (err, data) {

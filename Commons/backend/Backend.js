@@ -9,17 +9,29 @@ module.exports = function (io, mongoose, Schemas) {
         Schema = mongoose.Schema;
 
     router.get("/getLocations", function (req, res) {
-
-        Schemas.DepartmentDB.find().lean().exec(function (err, data) {
-            result = [];
-            for (var _data of data) {
-                if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {
-                    result.push(_data);
+        if (req.params.id=="HQ" || req.params.id == null){
+            Schemas.DepartmentDB.find().lean().exec(function (err, data) {
+                result = [];
+                for (var _data of data) {
+                    if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {
+                        result.push(_data);
+                    }
                 }
-            }
-            res.json(result);
-        });
-
+                res.json(result);
+            });
+        }   
+        else {
+            var filter = {DepartmentID:req.params.id}
+            Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
+                result = [];
+                for (var _data of data) {
+                    if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {
+                        result.push(_data);
+                    }
+                }
+                res.json(result);
+            });
+        }
     });
 
     /* Use during testing only */

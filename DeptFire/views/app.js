@@ -1,6 +1,6 @@
-var HQapp = angular.module("HQ", ["ngRoute"]);
+var DeptFireapp = angular.module("DeptFire", ["ngRoute"]);
 angular
-  .module("HQ")
+  .module("DeptFire")
   .controller("ReceiveCMOOrdersController", function($scope, socket) {
     // get past orders when first opened page
     console.log("hq first opened");
@@ -37,7 +37,7 @@ angular
   });
 
 angular
-  .module("HQ")
+  .module("DeptFire")
   .controller("ReceiveDeptUpdatesController", function($scope, socket) {
     // get past orders when first opened page
     console.log("hq first opened");
