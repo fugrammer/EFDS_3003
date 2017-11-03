@@ -115,7 +115,9 @@ module.exports = function (io,mongoose,Schemas) {
     updateHQ.save(function (err, dat) {
       if (err) console.log("Failed to save updateHQ log");
     });
-    io.emit("ReceiveDepartmentUpdates", updateHQ);
+    console.log("Received updateHQ");
+    console.log(updateHQ);
+    io.emit("deptUpdates", updateHQ);
   });
 
   router.post("/updateCMO", urlencodedParser, function (req, res) {
@@ -145,7 +147,7 @@ module.exports = function (io,mongoose,Schemas) {
     });
 
     io.emit("UpdateMap");
-    
+
     res.json(require("../../Commons/js/response").success);
   });
 
