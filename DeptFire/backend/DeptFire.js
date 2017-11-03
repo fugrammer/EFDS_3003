@@ -31,32 +31,19 @@ module.exports = function (io,mongoose,Schemas) {
 
   /* When app first loaded */
   router.get("/getPastOrders", function (req, res) {
-    Schemas.Crisis.find().lean().exec(function (err, data) {
+    Schemas.DepartmentOrder.find().lean().exec(function (err, data) {
       res.json(data);
     });
   });
 
   router.get("/getPastUpdates", function (req, res) {
-    Schemas.UpdateHQ.find().lean().exec(function (err, data) {
+    Schemas.UpdateDept.find().lean().exec(function (err, data) {
       res.json(data);
     });
   });
-
-  router.get("/getLocations", function (req, res) {
-    Schemas.DepartmentDB.find().lean().exec(function (err, data) {
-      result = [];
-      for (var _data of data) {
-        if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {
-          result.push(_data);
-        }
-      }
-      res.json(result);
-    });
-
-  });
-
+  /* TO DO */
   /* Order below and receive update from below, and receive order from above and update above */
-  router.post("/orderHQ", [urlencodedParser, jsonParser], function (req, res) {
+  router.post("/orderDept", [urlencodedParser, jsonParser], function (req, res) {
     var crisis = Schemas.Crisis({
       CrisisID: req.body.CrisisID,
       PlanID: req.body.PlanID,
@@ -106,20 +93,20 @@ module.exports = function (io,mongoose,Schemas) {
     res.end("success");
   });
 
-  router.post("/updateHQ", [urlencodedParser, jsonParser], function (req, res) {
+  router.post("/updateDept", [urlencodedParser, jsonParser], function (req, res) {
     res.json(require("../../Commons/js/response").success);
-    var updateHQ = Schemas.UpdateHQ({
+    var updateDept = Schemas.UpdateDept({
       "CrisisID": req.body.CrisisID,
       "Status": req.body.Status,
       "Comments": req.body.Comments
     });
-    updateHQ.save(function (err, dat) {
+    updateDept.save(function (err, dat) {
       if (err) console.log("Failed to save updateHQ log");
     });
-    io.emit("ReceiveDepartmentUpdates", updateHQ);
+    io.emit("ReceiveSquadUpdates", updateDept);
   });
 
-  router.post("/updateCMO", urlencodedParser, function (req, res) {
+  router.post("/updateHQ", urlencodedParser, function (req, res) {
     console.log(req.body);
     var a = {};
     for (let key of Object.keys(req.body)) {
