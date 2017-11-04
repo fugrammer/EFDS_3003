@@ -8,6 +8,19 @@ module.exports = function (io, mongoose, Schemas) {
         fs = require("fs"),
         Schema = mongoose.Schema;
 
+
+    router.get("/getCrisisAndPlans",function(req,res){
+        Schemas.Crisis.aggregate(
+            [
+              { $group : { _id : "$CrisisID", PlanID: { $addToSet: "$PlanID" } } }
+            ],
+            function (err,result){
+                if (err) console.log(err);
+                res.json(result);
+            }
+         )
+    })
+
     router.get("/getLocations", function (req, res) {
         console.log("Getting locations");
         console.log(`Parameters are ${req.query.id}`);
