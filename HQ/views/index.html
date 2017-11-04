@@ -113,16 +113,21 @@
             </li>
           </ul>
         </li>
+        
         <li ng-controller="ReceiveDeptUpdatesController as RDUC">
-          <li ng-repeat="update in deptUpdates">
-            <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin">
-                <h3 class="uk-card-title">Crisis ID: {{update.CrisisID}}</h3>
-                <ul class = "uk-list">
+          <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
+            <li ng-repeat="update in deptUpdates">
+              <h3 class="uk-accordion-title">Crisis ID: {{update.CrisisID}}</h3>
+              <div class="uk-accordion-content">
+                <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
+                  <ul class = "uk-list">
                     <li>Status: {{update.Status}}</li>
                     <li>Comments: {{update.Comments}}</li>
                 </ul>
-            </div>
-          </li>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
         <li>
           <!--Send orders to HQ-->

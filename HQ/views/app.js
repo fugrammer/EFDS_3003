@@ -56,6 +56,7 @@ angular
     });
     // receives new order
     socket.on("deptUpdates", function(data) {
+      console.log(data);
       //$scope.$apply(function() {
         UIkit.notification({
           message: "New updates received!",
@@ -64,6 +65,7 @@ angular
           timeout: 10000
         });
       $scope.deptUpdates.push(data);
+      console.log($scope.deptUpdates);
       //$scope.newCustomers.push(data.customer);
       // });
     });
