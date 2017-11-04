@@ -120,7 +120,36 @@ module.exports = function (io,mongoose,Schemas) {
     io.emit("deptUpdates", updateHQ);
   });
 
-  router.post("/updateCMO", urlencodedParser, function (req, res) {
+  router.post("/OrderDept",[urlencodedParser, jsonParser],function(req,res){
+    console.log(req.body);
+    department = req.body.DepartmentID;
+    var http = require("http");
+    var options = {
+      hostname: 'https://requestb.in',
+      port: 80,
+      path: `/szli1zsz/${department}`,
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      }
+    };
+    var req = http.request(options, function(res) {
+      console.log('Status: ' + res.statusCode);
+      console.log('Headers: ' + JSON.stringify(res.headers));
+      res.setEncoding('utf8');
+      res.on('data', function (body) {
+        console.log('Body: ' + body);
+      });
+    });
+    req.on('error', function(e) {
+      console.log('problem with request: ' + e.message);
+    });
+    // write data to request body
+    req.write(JSON.stringify(req.body));
+    req.end();
+  })
+
+  router.post("/updateCMO", [urlencodedParser, jsonParser], function (req, res) {
     console.log(req.body);
     var a = {};
     for (let key of Object.keys(req.body)) {
@@ -150,6 +179,7 @@ module.exports = function (io,mongoose,Schemas) {
 
     res.json(require("../../Commons/js/response").success);
   });
+
 
   return router;
 };
