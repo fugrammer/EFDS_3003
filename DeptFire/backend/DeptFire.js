@@ -31,52 +31,84 @@ module.exports = function (io,mongoose,Schemas) {
 
   /* When app first loaded */
   router.get("/getPastOrders", function (req, res) {
-    Schemas.DepartmentOrder.find().lean().exec(function (err, data) {
+    var filter = {DepartmentID:"DeptFire"}
+    Schemas.DepartmentOrder.find(filter).lean().exec(function (err, data) {
       res.json(data);
     });
   });
 
   router.get("/getPastUpdates", function (req, res) {
-    Schemas.UpdateDept.find().lean().exec(function (err, data) {
+    var filter = {DepartmentID:"DeptFire"}
+    Schemas.UpdateDept.find(filter).lean().exec(function (err, data) {
       res.json(data);
     });
   });
   /* TO DO */
   /* Order below and receive update from below, and receive order from above and update above */
   router.post("/orderDept", [urlencodedParser, jsonParser], function (req, res) {
-    var crisis = Schemas.Crisis({
-      CrisisID: req.body.CrisisID,
-      PlanID: req.body.PlanID,
-      CrisisType: req.body.CrisisType,
+
+    var departmentOrder = new Schema({
+      DepartmentID: req.body.DepartmentID,
+      NumberOfSquads: req.body.NumberOfSquads,
       Lat: req.body.Lat,
-      Lon: req.body.Lon,
-      Status: req.body.Status,
-      Description: req.body.Description,
-      SuggestedActions: req.body.SuggestedActions,
-      PointOfContact: req.body.PointOfContact
+      Lon: Numbereq.body.Lon,
+      CrisisID: Numbereq.body.CrisisID,
+      Severity: req.body.Severity,
+      Comments: req.body.Comments
     });
 
-    // var crisisLocation = Schemas.DepartmentDB({
-    //   Lat: req.body.Lat,
-    //   Lon: req.body.Lon,
-    //   DepartmentID: "Crisis",
-    //   SquadID: req.body.CrisisID.toString(),
-    //   CrisisType: req.body.CrisisType,
-    //   SquadStatus: req.body.Status
-    // });
+    departmentOrder.save(function (err, dat) {
+      if (err) console.log("Failed to save department order log to department db");
+    });
+
+    io.emit("ReceiveHQOrder", departmentOrder);
+    res.end("success");
+  });
+
+  router.post("/OrderSquad",[urlencodedParser, jsonParser],function(req,res){
+    var host = req.get('host');
+    console.log(`Host is ${host}`);
+    console.log(JSON.stringify(req.body));
+    department = req.body.DepartmentID;
+    squad = req.body.SquadID;
+    var request=require('request');
+       var json = req.body;
+       var options = {
+         url: 'localhost:3000/'+department+"/"+squad,
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json'
+         },
+         json: json
+       };
+       request(options, function(err, res, body) {
+         if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+           console.log(body);
+         }
+       });
+  })
+
+  router.post("/updateDept", [urlencodedParser, jsonParser], function (req, res) {
+    res.json(require("../../Commons/js/response").success);
+    var updateDept = Schemas.UpdateDept({
+      "DepartmentID":req.body.DepartmentID,
+      "SquadID":req.body.SquadID,
+      "Lat":req.body.Lat,
+      "Lon":req.body.Lon,
+      "CrisisID": req.body.CrisisID,
+      "Status": req.body.Status,
+      "Comments": req.body.Comments
+    });
 
     newData = {
       Lat: req.body.Lat,
       Lon: req.body.Lon,
-      DepartmentID: "Crisis",
-      SquadID: req.body.CrisisID.toString(),
-      CrisisType: req.body.CrisisType,
       SquadStatus: req.body.Status
     }
 
     /* Share DB with DepartmentDB lazy */
     /* Change both to update or create */
-    var query = { DepartmentID: "Crisis", SquadID: req.body.CrisisID.toString() };
+    var query = { DepartmentID: req.body.DepartmentID, SquadID:req.body.SquadID};
     Schemas.DepartmentDB.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
       if (err) {
         console.log("Failed to save squad update");
@@ -85,24 +117,10 @@ module.exports = function (io,mongoose,Schemas) {
       }
     });
 
-    crisis.save(function (err, dat) {
-      if (err) console.log("Failed to save crisis log to crisis db");
-    });
-
-    io.emit("ReceiveCMOOrder", crisis);
-    res.end("success");
-  });
-
-  router.post("/updateDept", [urlencodedParser, jsonParser], function (req, res) {
-    res.json(require("../../Commons/js/response").success);
-    var updateDept = Schemas.UpdateDept({
-      "CrisisID": req.body.CrisisID,
-      "Status": req.body.Status,
-      "Comments": req.body.Comments
-    });
     updateDept.save(function (err, dat) {
       if (err) console.log("Failed to save updateHQ log");
     });
+
     io.emit("ReceiveSquadUpdates", updateDept);
   });
 
@@ -116,17 +134,21 @@ module.exports = function (io,mongoose,Schemas) {
         return;
       }
     }
-
-    var crisis = Schemas.Crisis({
-      crisisID: req.body.crisisID,
-      status: req.body.status,
-      description: req.body.description
+    var request = require('request');
+    var json = req.body;
+    var options = {
+      url: 'localhost:3000/updateHQ',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      json: json
+    };
+    request(options, function (err, res, body) {
+      if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+        console.log(body);
+      }
     });
-
-    crisis.save(function (err, dat) {
-      if (err) console.log("Failed to save crisis log");
-    });
-
     res.json(require("../../Commons/js/response").success);
   });
   return router;

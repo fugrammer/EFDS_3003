@@ -1,4 +1,4 @@
-module.exports = function (io,mongoose,Schemas) {
+module.exports = function (io, mongoose, Schemas) {
   var express = require("express"),
     app = express(),
     router = express.Router(),
@@ -120,33 +120,26 @@ module.exports = function (io,mongoose,Schemas) {
     io.emit("deptUpdates", updateHQ);
   });
 
-  router.post("/OrderDept",[urlencodedParser, jsonParser],function(req,res){
-    console.log(req.body);
+  router.post("/OrderDept", [urlencodedParser, jsonParser], function (req, res) {
+    var host = req.get('host');
+    console.log(`Host is ${host}`);
+    console.log(JSON.stringify(req.body));
     department = req.body.DepartmentID;
-    var http = require("http");
+    var request = require('request');
+    var json = req.body;
     var options = {
-      hostname: 'https://requestb.in',
-      port: 80,
-      path: `/szli1zsz/${department}`,
+      url: 'localhost:3000/' + department,
       method: 'POST',
       headers: {
-          'Content-Type': 'application/json',
-      }
+        'Content-Type': 'application/json'
+      },
+      json: json
     };
-    var req = http.request(options, function(res) {
-      console.log('Status: ' + res.statusCode);
-      console.log('Headers: ' + JSON.stringify(res.headers));
-      res.setEncoding('utf8');
-      res.on('data', function (body) {
-        console.log('Body: ' + body);
-      });
+    request(options, function (err, res, body) {
+      if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+        console.log(body);
+      }
     });
-    req.on('error', function(e) {
-      console.log('problem with request: ' + e.message);
-    });
-    // write data to request body
-    req.write(JSON.stringify(req.body));
-    req.end();
   })
 
   router.post("/updateCMO", [urlencodedParser, jsonParser], function (req, res) {
@@ -159,24 +152,37 @@ module.exports = function (io,mongoose,Schemas) {
         return;
       }
     }
-
     newData = {
       SquadStatus: req.body.Status
     }
-
     /* Share DB with DepartmentDB lazy */
     /* Change both to update or create */
     var query = { DepartmentID: "Crisis", SquadID: req.body.CrisisID.toString() };
     Schemas.DepartmentDB.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
       if (err) {
-        console.log("Failed to save squad update");
+        console.log("Failed to save crisis update");
       } else {
-        console.log("Saved squad update");
+        console.log("Saved crisis update");
       }
     });
 
-    io.emit("UpdateMap");
+    var request = require('request');
+    var json = req.body;
+    var options = {
+      url: 'CMOURL',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      json: json
+    };
+    // request(options, function (err, res, body) {
+    //   if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+    //     console.log(body);
+    //   }
+    // });
 
+    io.emit("UpdateMap");
     res.json(require("../../Commons/js/response").success);
   });
 

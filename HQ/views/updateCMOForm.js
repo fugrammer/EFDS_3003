@@ -1,9 +1,9 @@
-$("#submitUpdate").submit(function(e) {
+$("#sendCrisisUpdate").submit(function(e) {
     var url = "/HQ/updateCMO"; // the script where you handle the form input.
     $.ajax({
       type: "POST",
       url: url,
-      data: $("#submitUpdate").serialize(), // serializes the form's elements.
+      data: $("#sendCrisisUpdate").serialize(), // serializes the form's elements.
       success: function(data) {
         UIkit.notification({
           message: "Update sent!",
@@ -12,7 +12,7 @@ $("#submitUpdate").submit(function(e) {
           timeout: 10000
         });
         //alert(JSON.stringify(data)); // show response from the php script.
-        $("#submitUpdate")[0].reset();
+        $("#sendCrisisUpdate")[0].reset();
       },
       statusCode: {
         404: function() {
