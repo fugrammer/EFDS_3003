@@ -100,7 +100,7 @@
                         <li>Crisis Type: {{order.CrisisType}}</li>
                         <li>Description of Case: {{order.Description}}</li>
                         <li>Lat: {{order.Lat}}</li>
-                        <li>Lon: {{order.Lon}}</li>                        
+                        <li>Lon: {{order.Lon}}</li>
                         <li  ng-repeat"suborder in order.SuggestedActions">Suggested Action:
                           <ul class ="uk-list">
                             <li>Department Type: {{suborder.DepartmentType}}</li>
@@ -114,7 +114,7 @@
             </li>
           </ul>
         </li>
-        
+
         <li ng-controller="ReceiveDeptUpdatesController as RDUC">
           <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
             <li ng-repeat="update in deptUpdates">
@@ -130,66 +130,59 @@
             </li>
           </ul>
         </li>
-        <li>
-          <!--Send orders to HQ-->
-            <form class="uk-form-horizontal uk-margin-large" id="submitUpdate" action="/HQ/updateCMO" method="post">
 
+        <li>
+          <!--Send orders to DEPT-->
+            <form class="uk-form-horizontal uk-margin-large" id="orderDEPT" action="/HQ/OrderDept" method="post">
               <div class="uk-margin">
                   <div class="uk-form-label">Department</div>
                   <div class="uk-form-controls">
-                      <select class="uk-select" name="status">
-                                  <option>Emergency Medical Services Department</option>
-                                  <option>Counter Terrorism Department</option>
-                                  <option>Urban Search & Rescue Department</option>
-                                  <option>Civilian Evacuation Department</option>
-                                  <option>Infectious Disease Quarantine Department</option>
-                                  <option>Firefighting Department</option>
-                                  <option>Bomb Disposal Department</option>
-                                  <option>Hazmat Department</option>
-                              </select>
+                      <select class="uk-select" name="DepartmentID">
+                          <option>Emergency Medical Services Department</option>
+                          <option>Counter Terrorism Department</option>
+                          <option>Urban Search & Rescue Department</option>
+                          <option>Civilian Evacuation Department</option>
+                          <option>Infectious Disease Quarantine Department</option>
+                          <option value="DeptFire">Firefighting Department</option>
+                          <option>Bomb Disposal Department</option>
+                          <option>Hazmat Department</option>
+                      </select>
                   </div>
               </div>
               <div class="uk-margin">
                   <div class="uk-form-label">Squad(s) needed</div>
                   <div class="uk-form-controls">
-                      <select class="uk-select" name="status">
-                                  <option>0</option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                              </select>
+                      <input class="uk-input" type="text" name="NumberOfSquads" placeholder="Enter number of Squad(s) needed">
                   </div>
               </div>
               <div class="uk-margin">
-                  <div class="uk-form-label">Location</div>
+                  <div class="uk-form-label">Lat</div>
                   <div class="uk-form-controls">
-                      <input class="uk-input" type="text" name="crisisID" placeholder="Enter Location">
+                      <input class="uk-input" type="text" name="Lat" placeholder="Enter Latitude">
+                  </div>
+              </div>
+              <div class="uk-margin">
+                  <div class="uk-form-label">Lon</div>
+                  <div class="uk-form-controls">
+                      <input class="uk-input" type="text" name="Lon" placeholder="Enter Longitude">
                   </div>
               </div>
                 <div class="uk-margin">
                     <div class="uk-form-label">Crisis ID</div>
                     <div class="uk-form-controls">
-                        <select class="uk-select" name="status">
-                                    <option>Placeholder 001</option>
-                                    <option>Placeholder 002</option>
-                                </select>
+                        <input class="uk-input" type="text" name="CrisisID" placeholder="Enter Crisis ID">
                     </div>
                 </div>
                 <div class="uk-margin">
                     <div class="uk-form-label">Severity</div>
                     <div class="uk-form-controls">
-                        <select class="uk-select" name="status">
-                                    <option>0</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                </select>
+                        <input class="uk-input" type="text" name="Severity" placeholder="Enter severity">
                     </div>
                 </div>
                 <div class="uk-margin">
                     <div class="uk-form-label">Comments</div>
                     <div class="uk-form-controls">
-                        <input class="uk-input" type="text" name="crisisID" placeholder="Enter Comments">
+                        <input class="uk-input" type="text" name="Comments" placeholder="Enter Comments">
                     </div>
                 </div>
                 <div class="uk-margin" uk-margin>
