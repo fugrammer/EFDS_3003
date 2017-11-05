@@ -101,7 +101,7 @@
                         <li>Number of Squads: {{order.NumberOfSquads}}</li>
                         <li>Lat: {{order.Lat}}</li>
                         <li>Lon: {{order.Lon}}</li>
-                        <li>Severity: {{order.Severity}}</li>                        
+                        <li>Severity: {{order.Severity}}</li>
                         <li>Comments: {{order.Comments}}</li>
                     </ul>
                 </div>
@@ -117,30 +117,39 @@
                     <li>Squad ID: {{update.SquadID}}</li>
                     <li>Lat: {{order.Lat}}</li>
                     <li>Lon: {{order.Lon}}</li>
-                    <li>Status: {{order.Status}}</li>                        
+                    <li>Status: {{order.Status}}</li>
                     <li>Comments: {{order.Comments}}</li>
                 </ul>
             </div>
           </li>
         </li>
         <li>
-          <!--Send orders to HQ-->
+          <!--Send orders to Squad-->
             <form class="uk-form-horizontal uk-margin-large" id="submitUpdate" action="/HQ/updateCMO" method="post">
 
               <div class="uk-margin">
-                  <div class="uk-form-label">Department</div>
+                  <div class="uk-form-label">Squad ID</div>
                   <div class="uk-form-controls">
                       <select class="uk-select" name="status">
-                                  <option>Emergency Medical Services Department</option>
-                                  <option>Counter Terrorism Department</option>
-                                  <option>Urban Search & Rescue Department</option>
-                                  <option>Civilian Evacuation Department</option>
-                                  <option>Infectious Disease Quarantine Department</option>
-                                  <option>Firefighting Department</option>
-                                  <option>Bomb Disposal Department</option>
-                                  <option>Hazmat Department</option>
-                              </select>
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                          <option>10</option>
+                      </select>
                   </div>
+              </div>
+              <div class="uk-margin">
+                    <div class="uk-form-label">Crisis ID</div>
+                    <div class="uk-form-controls">
+                        <input class="uk-input" type="text" name="crisisID" placeholder="Enter Crisis ID">
+                    </div>
               </div>
               <div class="uk-margin">
                   <div class="uk-form-label">Squad(s) needed</div>
@@ -159,15 +168,7 @@
                       <input class="uk-input" type="text" name="crisisID" placeholder="Enter Location">
                   </div>
               </div>
-                <div class="uk-margin">
-                    <div class="uk-form-label">Crisis ID</div>
-                    <div class="uk-form-controls">
-                        <select class="uk-select" name="status">
-                                    <option>Placeholder 001</option>
-                                    <option>Placeholder 002</option>
-                                </select>
-                    </div>
-                </div>
+
                 <div class="uk-margin">
                     <div class="uk-form-label">Severity</div>
                     <div class="uk-form-controls">
