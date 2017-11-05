@@ -85,6 +85,7 @@ module.exports = function (io,mongoose,Schemas) {
            console.log(body);
          }
        });
+       res.end("success");
   })
 
   router.post("/updateDept", [urlencodedParser, jsonParser], function (req, res) {
