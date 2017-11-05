@@ -99,7 +99,8 @@
                     <ul class ="uk-list">
                         <li>Crisis Type: {{order.CrisisType}}</li>
                         <li>Description of Case: {{order.Description}}</li>
-                        <li>Location: {{order.Lat}}</li>
+                        <li>Lat: {{order.Lat}}</li>
+                        <li>Lon: {{order.Lon}}</li>                        
                         <li  ng-repeat"suborder in order.SuggestedActions">Suggested Action:
                           <ul class ="uk-list">
                             <li>Department Type: {{suborder.DepartmentType}}</li>

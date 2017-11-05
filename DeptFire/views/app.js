@@ -1,24 +1,24 @@
 var DeptFireapp = angular.module("DeptFire", ["ngRoute"]);
 angular
   .module("DeptFire")
-  .controller("ReceiveCMOOrdersController", function($scope, socket) {
+  .controller("ReceiveHQOrdersController", function($scope, socket) {
     // get past orders when first opened page
-    console.log("hq first opened");
-    $scope.CMOOrders = [];
+    console.log("DeptFire first opened");
+    $scope.DeptFireOrders = [];
     $.ajax({
       type: "GET",
-      url: "/HQ/getPastOrders",
+      url: "/DeptFire/getPastOrders",
       success: function(data) {
         console.log(data);
         for (let data1 of data){
           $scope.$apply(function(){
-            $scope.CMOOrders.push(data1);
+            $scope.DeptFireOrders.push(data1);
           })
         }
       }
     });
     // receives new order
-    socket.on("CMOOrders", function(data) {
+    socket.on("HQOrders", function(data) {
       //$scope.$apply(function() {
         UIkit.notification({
           message: "New order received!",
@@ -26,50 +26,50 @@ angular
           pos: "top-right",
           timeout: 10000
         });
-      $scope.CMOOrders.push(data);
+      $scope.HQOrders.push(data);
       //$scope.newCustomers.push(data.customer);
       // });
     });
-    socket.on("CMOOrderHistory", function(data) {
+    socket.on("HQOrderHistory", function(data) {
         console.log("MESSAGE RECEIVED!");
-        $scope.CMOOrders.push(data);
+        $scope.HQOrders.push(data);
     });
   });
 
 angular
   .module("DeptFire")
-  .controller("ReceiveDeptUpdatesController", function($scope, socket) {
-    // get past orders when first opened page
-    console.log("hq first opened");
+  .controller("ReceiveSquadUpdatesController", function($scope, socket) {
+    // get past updates when first opened page
+    console.log("DeptFire first opened");
     $scope.deptUpdates = [];
     $.ajax({
       type: "GET",
-      url: "/HQ/getPastUpdates",
+      url: "/DeptFire/getPastUpdates",
       success: function(data) {
         console.log(data);
         for (let data1 of data){
           $scope.$apply(function(){
-            $scope.deptUpdates.push(data1);
+            $scope.squadUpdates.push(data1);
           })
         }
       }
     });
-    // receives new order
-    socket.on("deptUpdates", function(data) {
+    // receives new updates
+    socket.on("squadUpdates", function(data) {
       //$scope.$apply(function() {
         UIkit.notification({
-          message: "New order received!",
+          message: "New updates received!",
           status: "primary",
           pos: "top-right",
           timeout: 10000
         });
-      $scope.deptUpdates.push(data);
+      $scope.squadUpdates.push(data);
       //$scope.newCustomers.push(data.customer);
       // });
     });
-    socket.on("deptUpdateHistory", function(data) {
+    socket.on("squadUpdateHistory", function(data) {
         console.log("MESSAGE RECEIVED!");
-        $scope.deptUpdates.push(data);
+        $scope.squadUpdates.push(data);
     });
   });
 

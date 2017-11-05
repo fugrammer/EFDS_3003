@@ -34,9 +34,9 @@
     <div class="uk-width-1-6">
       <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
         <li><a href="#">Map</a></li>
-        <li><a href="#">CMO Orders</a></li>
-        <li><a href="#">Dept Updates</a></li>
-        <li><a href="#">Send Order to Department</a></li>
+        <li><a href="#">HQ Orders</a></li>
+        <li><a href="#">Squad Updates</a></li>
+        <li><a href="#">Send Order to Squad</a></li>
         <li><a href="#">Send Crisis Update</a></li>
       </ul>
     </div>
@@ -90,36 +90,35 @@
             </script>
           </div>
         </li>
-        <li ng-controller="ReceiveCMOOrdersController as RCC">
+        <li ng-controller="ReceiveHQOrdersController">
           <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
-            <li ng-repeat="order in CMOOrders">
+            <li ng-repeat="order in HQOrders">
               <h3 class="uk-accordion-title">Crisis ID: {{order.CrisisID}}</h3>
               <div class="uk-accordion-content">
                 <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
                     <ul class ="uk-list">
-                        <li>Crisis Type: {{order.CrisisType}}</li>
-                        <li>Description of Case: {{order.Description}}</li>
-                        <li>Location: {{order.Lat}}</li>
-                        <li  ng-repeat"suborder in order.SuggestedActions">Suggested Action:
-                          <ul class ="uk-list">
-                            <li>Department Type: {{suborder.DepartmentType}}</li>
-                            <li>Severity Rating: {{suborder.SeverityRating}}</li>
-                          </ul>
-                        </li>
-                        <li>Point of Contact: {{order.PointOfContact}}</li>
+                        <li>Department ID :{{order.DepartmentID}}  </li>
+                        <li>Number of Squads: {{order.NumberOfSquads}}</li>
+                        <li>Lat: {{order.Lat}}</li>
+                        <li>Lon: {{order.Lon}}</li>
+                        <li>Severity: {{order.Severity}}</li>                        
+                        <li>Comments: {{order.Comments}}</li>
                     </ul>
                 </div>
               </div>
             </li>
           </ul>
         </li>
-        <li ng-controller="ReceiveDeptUpdatesController as RDUC">
-          <li ng-repeat="update in deptUpdates">
+        <li ng-controller="ReceiveSquadUpdatesController">
+          <li ng-repeat="update in squadUpdates">
             <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin">
                 <h3 class="uk-card-title">Crisis ID: {{update.CrisisID}}</h3>
                 <ul class = "uk-list">
-                    <li>Status: {{update.Status}}</li>
-                    <li>Comments: {{update.Comments}}</li>
+                    <li>Squad ID: {{update.SquadID}}</li>
+                    <li>Lat: {{order.Lat}}</li>
+                    <li>Lon: {{order.Lon}}</li>
+                    <li>Status: {{order.Status}}</li>                        
+                    <li>Comments: {{order.Comments}}</li>
                 </ul>
             </div>
           </li>

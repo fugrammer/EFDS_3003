@@ -39,7 +39,7 @@ angular
 angular
   .module("HQ")
   .controller("ReceiveDeptUpdatesController", function($scope, socket) {
-    // get past orders when first opened page
+    // get past updates when first opened page
     console.log("hq first opened");
     $scope.deptUpdates = [];
     $.ajax({
@@ -54,7 +54,7 @@ angular
         }
       }
     });
-    // receives new order
+    // receives new update
     socket.on("deptUpdates", function(data) {
       console.log(data);
       //$scope.$apply(function() {
