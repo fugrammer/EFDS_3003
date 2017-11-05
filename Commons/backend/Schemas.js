@@ -38,19 +38,22 @@ module.exports = function (mongoose) {
     }, { versionKey: false });
 
     var squadOrderSchema = new Schema({
+        SquadID: String,
         CrisisID: Number,
         Status: String,
         Comments: String
     }, { versionKey: false });
 
     var updateHQSchema = new Schema({
+        DepartmentID: String,
         CrisisID: Number,
         Status: String,
         Comments: String
     }, { versionKey: false });
 
     var updateDeptSchema = new Schema({
-        SquadID : Number,
+        DepartmentID: String,
+        SquadID: String,
         CrisisID: Number,
         Status: String,
         Comments: String,
@@ -63,9 +66,9 @@ module.exports = function (mongoose) {
         Crisis: mongoose.model("Crisis", crisisSchema),
         UpdateHQ: mongoose.model("UpdateHQ", updateHQSchema),
         DepartmentOrder: mongoose.model("DepartmentOrder", departmentOrderSchema),
-        UpdateDept : mongoose.model("UpdateDept", updateDeptSchema),
-        SquadOrder : mongoose.model("SquadOrder",squadOrderSchema)
+        UpdateDept: mongoose.model("UpdateDept", updateDeptSchema),
+        SquadOrder: mongoose.model("SquadOrder", squadOrderSchema)
     };
-    
+
     return models;
 }
