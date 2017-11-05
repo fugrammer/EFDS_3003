@@ -140,6 +140,7 @@ module.exports = function (io, mongoose, Schemas) {
         console.log(body);
       }
     });
+    res.end("success");
   })
 
   router.post("/updateCMO", [urlencodedParser, jsonParser], function (req, res) {
