@@ -40,7 +40,9 @@ module.exports = function (mongoose) {
     var squadOrderSchema = new Schema({
         SquadID: String,
         CrisisID: Number,
-        Status: String,
+        Lat: Number,
+        Lon: Number,
+        Severity: Number,
         Comments: String
     }, { versionKey: false });
 

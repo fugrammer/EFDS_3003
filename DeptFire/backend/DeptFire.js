@@ -17,7 +17,8 @@ module.exports = function (io,mongoose,Schemas) {
   /* Provide overall of DeptFire */
   router.get("/getStatus", function (req, res) {
     var departmentStatus = {}
-    Schemas.DepartmentDB.find().lean().exec(function (err, data) {
+    var filter = {"DepartmentID":"Fire"};
+    Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
       for (var _data of data) {
         departmentStatus[_data.DepartmentID] = departmentStatus[_data.DepartmentID] || { max: 0, available: 0 };
         departmentStatus[_data.DepartmentID].max += 1;
@@ -46,7 +47,6 @@ module.exports = function (io,mongoose,Schemas) {
   /* TO DO */
   /* Order below and receive update from below, and receive order from above and update above */
   router.post("/orderDept", [urlencodedParser, jsonParser], function (req, res) {
-
     var departmentOrder = new Schema({
       DepartmentID: req.body.DepartmentID,
       NumberOfSquads: req.body.NumberOfSquads,
@@ -56,7 +56,6 @@ module.exports = function (io,mongoose,Schemas) {
       Severity: req.body.Severity,
       Comments: req.body.Comments
     });
-
     departmentOrder.save(function (err, dat) {
       if (err) console.log("Failed to save department order log to department db");
     });
