@@ -37,7 +37,7 @@
         <li><a href="#">HQ Orders</a></li>
         <li><a href="#">Squad Updates</a></li>
         <li><a href="#">Send Order to Squad</a></li>
-        <li><a href="#">Send Crisis Update</a></li>
+        <li><a href="#">Send Update to HQ</a></li>
       </ul>
     </div>
     <div class="uk-width-5-6">
@@ -180,35 +180,21 @@
             </form>
         </li>
         <li>
-          <form class="uk-form-horizontal uk-margin-large" id="sendCrisisUpdate" action="/HQ/updateCMO" method="post">
+          <form class="uk-form-horizontal uk-margin-large" id="deptUpdateHQ" action="/Deptfire/updateHQ" method="post">
 
-              <div class="uk-margin">
-                  <div class="uk-form-label">Crisis ID</div>
-                  <div class="uk-form-controls">
-                    <select class="uk-select" name="Crisis ID">
-                                <option>Placeholder 001</option>
-                                <option>Placeholder 002</option>
-                    </select>
-                  </div>
-              </div>
-
-              <div class="uk-margin">
-                  <div class="uk-form-label">Plan ID</div>
-                  <div class="uk-form-controls">
-                    <select class="uk-select" name="Crisis ID">
-                                <option>Placeholder 001</option>
-                                <option>Placeholder 002</option>
-                    </select>
-                  </div>
-              </div>
+            <div class="uk-margin">
+                <div class="uk-form-label">Crisis ID</div>
+                <div class="uk-form-controls">
+                    <input class="uk-input" type="text" name="CrisisID" placeholder="Enter Crisis ID">
+                </div>
+            </div>
 
               <div class="uk-margin">
                   <div class="uk-form-label">Status</div>
                   <div class="uk-form-controls">
                       <select class="uk-select" name="status">
-                                  <option>On-going</option>
-                                  <option>Clean-up</option>
-                                  <option>Cleared</option>
+                                  <option>Mission On-going</option>
+                                  <option>Mission Completed</option>
                               </select>
                   </div>
               </div>
