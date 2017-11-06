@@ -27,7 +27,7 @@ angular
           timeout: 10000
         });
       console.log(data);
-      $scope.HQOrders.push(data);
+      $scope.DeptFireOrders.push(data);
       //$scope.newCustomers.push(data.customer);
       // });
     });
@@ -38,7 +38,8 @@ angular
   .controller("ReceiveSquadUpdatesController", function($scope, socket) {
     // get past updates when first opened page
     console.log("DeptFire first opened");
-    $scope.deptUpdates = [];
+    $scope.squadUpdates = [];
+    console.log("making ajax");
     $.ajax({
       type: "GET",
       url: "/DeptFire/getPastUpdates",
@@ -49,24 +50,24 @@ angular
             $scope.squadUpdates.push(data1);
           })
         }
-      }
+      },
+      failure: function(result){
+        console.log("FAILED");
+        console.log(result);
+    }
     });
+    console.log("after ajax");
     // receives new updates
-    socket.on("squadUpdates", function(data) {
-      //$scope.$apply(function() {
+    socket.on("ReceiveSquadUpdates", function(data) {
         UIkit.notification({
           message: "New updates received!",
           status: "primary",
           pos: "top-right",
           timeout: 10000
         });
+      console.log(`ReceiveSquadUpdates data:`);
+      console.log(data);
       $scope.squadUpdates.push(data);
-      //$scope.newCustomers.push(data.customer);
-      // });
-    });
-    socket.on("squadUpdateHistory", function(data) {
-        console.log("MESSAGE RECEIVED!");
-        $scope.squadUpdates.push(data);
     });
   });
 

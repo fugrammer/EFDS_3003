@@ -59,8 +59,6 @@ module.exports = function (mongoose) {
         CrisisID: Number,
         Status: String,
         Comments: String,
-        Lat: Number,
-        Lon: Number
     }, { versionKey: false });
 
     var models = {

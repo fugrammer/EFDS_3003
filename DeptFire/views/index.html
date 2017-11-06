@@ -92,7 +92,7 @@
         </li>
         <li ng-controller="ReceiveHQOrdersController">
           <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
-            <li ng-repeat="order in HQOrders">
+            <li ng-repeat="order in DeptFireOrders">
               <h3 class="uk-accordion-title">Crisis ID: {{order.CrisisID}}</h3>
               <div class="uk-accordion-content">
                 <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
@@ -110,18 +110,22 @@
           </ul>
         </li>
         <li ng-controller="ReceiveSquadUpdatesController">
-          <li ng-repeat="update in squadUpdates">
-            <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin">
-                <h3 class="uk-card-title">Crisis ID: {{update.CrisisID}}</h3>
-                <ul class = "uk-list">
-                    <li>Squad ID: {{update.SquadID}}</li>
-                    <li>Lat: {{order.Lat}}</li>
-                    <li>Lon: {{order.Lon}}</li>
-                    <li>Status: {{order.Status}}</li>
-                    <li>Comments: {{order.Comments}}</li>
-                </ul>
-            </div>
-          </li>
+            <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
+                <li ng-repeat="update in squadUpdates">
+                  <h3 class="uk-accordion-title">Crisis ID: {{update.CrisisID}}</h3>
+                  <div class="uk-accordion-content">
+                    <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
+                        <ul class ="uk-list">
+                            <li>Squad ID: {{update.SquadID}}</li>
+                            <li>Lat: {{update.Lat}}</li>
+                            <li>Lon: {{update.Lon}}</li>
+                            <li>Status: {{update.Status}}</li>
+                            <li>Comments: {{update.Comments}}</li>
+                        </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
         </li>
         <li>
           <!--Send orders to Squad-->
@@ -180,7 +184,7 @@
             </form>
         </li>
         <li>
-          <form class="uk-form-horizontal uk-margin-large" id="deptUpdateHQ" action="/Deptfire/updateHQ" method="post">
+          <form class="uk-form-horizontal uk-margin-large" id="deptUpdateHQ" action="/DeptFire/updateHQ" method="post">
 
             <div class="uk-margin">
                 <div class="uk-form-label">Crisis ID</div>
@@ -192,7 +196,7 @@
               <div class="uk-margin">
                   <div class="uk-form-label">Status</div>
                   <div class="uk-form-controls">
-                      <select class="uk-select" name="status">
+                      <select class="uk-select" name="Status">
                                   <option>Mission On-going</option>
                                   <option>Mission Completed</option>
                               </select>
@@ -202,7 +206,7 @@
               <div class="uk-margin">
                   <div class="uk-form-label">Description</div>
                   <div class="uk-form-controls">
-                      <input class="uk-input" type="text" name="description" >
+                      <input class="uk-input" type="text" name="Comments" >
                   </div>
               </div>
 
@@ -220,7 +224,6 @@
   <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
   <script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
   <script src="/DeptFire/views/app.js"></script>
-  <script src="/DeptFire/views/form.js"></script>
   <script src="/DeptFire/views/mapcontroller.js"></script>
   <script src="/DeptFire/views/orderSquadForm.js"></script>
 </body>

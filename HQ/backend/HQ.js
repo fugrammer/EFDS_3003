@@ -117,7 +117,7 @@ module.exports = function (io, mongoose, Schemas) {
   });
 
   router.post("/updateHQ", [urlencodedParser, jsonParser], function (req, res) {
-    res.json(require("../../Commons/js/response").success);
+   
     var updateHQ = Schemas.UpdateHQ({
       "CrisisID": req.body.CrisisID,
       "Status": req.body.Status,
@@ -129,6 +129,7 @@ module.exports = function (io, mongoose, Schemas) {
     console.log("Received updateHQ");
     console.log(updateHQ);
     io.emit("deptUpdates", updateHQ);
+    res.json(require("../../Commons/js/response").success);
   });
 
   router.post("/OrderDept", [urlencodedParser, jsonParser], function (req, res) {
@@ -139,17 +140,18 @@ module.exports = function (io, mongoose, Schemas) {
     var request = require('request');
     var json = req.body;
     var options = {
-      url: 'localhost:3000/' + department +'/OrderDept',
+      url: 'http://localhost:3000/' + department +'/OrderDept',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      json: json
+      json: req.body
     };
     request(options, function (err, res, body) {
       if (res && (res.statusCode === 200 || res.statusCode === 201)) {
         console.log(body);
       } else{
+        console.log('localhost:3000/' + department +'/OrderDept');
         console.log("Sending update to Dept failed");
       }
     });
@@ -157,6 +159,7 @@ module.exports = function (io, mongoose, Schemas) {
   })
 
   router.post("/updateCMO", [urlencodedParser, jsonParser], function (req, res) {
+    console.log("/updateCMO");
     console.log(req.body);
     var a = {};
     for (let key of Object.keys(req.body)) {

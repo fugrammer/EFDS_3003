@@ -56,11 +56,12 @@ module.exports = function (io,mongoose,Schemas) {
       Severity: req.body.Severity,
       Comments: req.body.Comments
     });
-    
+
     departmentOrder.save(function (err, dat) {
       if (err) console.log("Failed to save department order log to department db");
     });
-    console.log("ReceiveHQOrder");  
+    console.log("ReceiveHQOrder");
+    console.log(departmentOrder); 
     io.emit("ReceiveHQOrder", departmentOrder);
     res.end("success");
   });
@@ -74,7 +75,7 @@ module.exports = function (io,mongoose,Schemas) {
     var request=require('request');
        var json = req.body;
        var options = {
-         url: 'localhost:3000/'+department+"/"+squad,
+         url: 'http://localhost:3000/'+department+"/"+squad,
          method: 'POST',
          headers: {
            'Content-Type': 'application/json'
@@ -83,33 +84,35 @@ module.exports = function (io,mongoose,Schemas) {
        };
        request(options, function(err, res, body) {
          if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+            console.log("Order squad success");
            console.log(body);
+         }else{
+           console.log("order squad failed")
          }
        });
        res.end("success");
   })
 
   router.post("/updateDept", [urlencodedParser, jsonParser], function (req, res) {
-    res.json(require("../../Commons/js/response").success);
+    
     var updateDept = Schemas.UpdateDept({
       "DepartmentID":req.body.DepartmentID,
       "SquadID":req.body.SquadID,
-      "Lat":req.body.Lat,
-      "Lon":req.body.Lon,
       "CrisisID": req.body.CrisisID,
       "Status": req.body.Status,
       "Comments": req.body.Comments
     });
 
+    console.log("update dept with: ");
+    console.log(updateDept);
     newData = {
       Lat: req.body.Lat,
       Lon: req.body.Lon,
       SquadStatus: req.body.Status
     }
-
     /* Share DB with DepartmentDB lazy */
     /* Change both to update or create */
-    var query = { DepartmentID: req.body.DepartmentID, SquadID:req.body.SquadID};
+    var query = { DepartmentID: req.body.DepartmentID.replace("Dept",""), SquadID:req.body.SquadID}; 
     Schemas.DepartmentDB.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
       if (err) {
         console.log("Failed to save squad update");
@@ -121,11 +124,12 @@ module.exports = function (io,mongoose,Schemas) {
     updateDept.save(function (err, dat) {
       if (err) console.log("Failed to save updateHQ log");
     });
-
     io.emit("ReceiveSquadUpdates", updateDept);
+    res.json(require("../../Commons/js/response").success);
   });
 
   router.post("/updateHQ", urlencodedParser, function (req, res) {
+    console.log("updateHQ");
     console.log(req.body);
     var a = {};
     for (let key of Object.keys(req.body)) {
@@ -138,16 +142,18 @@ module.exports = function (io,mongoose,Schemas) {
     var request = require('request');
     var json = req.body;
     var options = {
-      url: 'localhost:3000/updateHQ',
+      url: 'http://localhost:3000/HQ/updateHQ',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      json: json
+      body: JSON.stringify(req.body)
     };
     request(options, function (err, res, body) {
       if (res && (res.statusCode === 200 || res.statusCode === 201)) {
         console.log(body);
+      } else {
+        console.log("Failed to send update to HQ"); 
       }
     });
     res.json(require("../../Commons/js/response").success);
