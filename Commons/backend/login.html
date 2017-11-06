@@ -1,35 +1,71 @@
 <html>
-
 <head>
     <link rel="stylesheet" href="/css/uikit.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="/js/uikit.min.js"></script>
     <script src="/js/uikit-icons.min.js"></script>
-</head>
+    <script>
+        function validate() {
+            var username = document.forms["loginForm"]["username"].value;
+            var password = document.forms["loginForm"]["password"].value;
+            if (username === "root" && password == "toor") {
+                console.log(getParameterByName("redirect"));
+                var d = new Date();
+                d.setTime(d.getTime() + (60 * 60 * 1000)); //1 hr expiry
+                var expires = "expires=" + d.toUTCString();
+                document.cookie = "loginToken=thomasthamHQ;" + expires;
+                location = getParameterByName("redirect");
 
+            } else {
+                console.log("wrong credentials");
+            }
+            return false;
+        }
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    </script>
+</head>
 <body>
     <div>
-        <div class="uk-card uk-card-body">
-            <h3 class="uk-card-title">Login</h3>
-            <form>
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon" uk-icon="icon: user"></span>
-                        <input class="uk-input" type="text">
+        <div class="uk-grid-medium uk-child-width-expand@s uk-text-center" uk-grid>
+            <div>
+                <div class=""></div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div class="uk-card uk-card-body">
+                        <h3 class="uk-card-title">Please Login</h3>
+                        <form name="loginForm" method="POST" onsubmit="return validate()">
+                            <div class="uk-margin">
+                                <div class="uk-inline">
+                                    <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                    <input class="uk-input" type="text" name="username" placeholder="Username">
+                                </div>
+                            </div>
+
+                            <div class="uk-margin">
+                                <div class="uk-inline">
+                                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+                                    <input class="uk-input" type="password" name="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <input class="uk-button uk-button-default" type="submit" value="Submit">
+                        </form>
                     </div>
                 </div>
-
-                <div class="uk-margin">
-                    <div class="uk-inline">
-                        <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
-                        <input class="uk-input" type="password">
-                    </div>
-                </div>
-
-                <button type="submit">Submit</button>
-            </form>
+            </div>
+            <div>
+                <div class=""></div>
+            </div>
         </div>
+
     </div>
 </body>
-
 </html>

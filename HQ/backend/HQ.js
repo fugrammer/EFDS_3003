@@ -5,17 +5,20 @@ module.exports = function (io, mongoose, Schemas) {
     bodyParser = require("body-parser"),
     urlencodedParser = bodyParser.urlencoded({ extended: false }),
     jsonParser = bodyParser.json({ limit: "500mb" }),
+    cookieParser = require("cookie-parser"),
     fs = require("fs"),
     Schema = mongoose.Schema;
 
-  router.get("/", function (req, res) {
-    // if (!req.cookie) {
-    //   res.redirect("/login?redirect=/HQ");
-    // } 
-    //else {
+  router.get("/",function (req, res) {
+    if (!(req.cookies.loginToken==="thomasthamHQ")){
+      console.log("no cookie found!");
+      res.redirect("/login?redirect=/HQ");
+    } 
+    else {
+      console.log("cookie accepted!");
     var html = fs.readFileSync(__dirname + "/../views/index.html");
     res.end(html);
-    //}
+    }
   });
 
   /* Provide overall of HQ */
