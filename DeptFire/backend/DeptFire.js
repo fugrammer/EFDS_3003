@@ -138,6 +138,7 @@ module.exports = function (io, mongoose, Schemas) {
   router.post("/updateHQ", urlencodedParser, function (req, res) {
     console.log("updateHQ");
     console.log(req.body);
+    var host = req.get('host');
     var a = {};
     for (let key of Object.keys(req.body)) {
       if (!req.body[key]) {
@@ -149,7 +150,7 @@ module.exports = function (io, mongoose, Schemas) {
     var request = require('request');
     var json = req.body;
     var options = {
-      url: 'http://localhost:3000/HQ/updateHQ',
+      url: `http://${host}/HQ/updateHQ`,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

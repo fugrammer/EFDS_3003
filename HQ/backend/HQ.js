@@ -140,7 +140,7 @@ module.exports = function (io, mongoose, Schemas) {
     var request = require('request');
     var json = req.body;
     var options = {
-      url: 'http://localhost:3000/' + department +'/OrderDept',
+      url: `http://${host}/` + department +'/OrderDept',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
