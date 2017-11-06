@@ -51,15 +51,15 @@ module.exports = function (io, mongoose, Schemas) {
 
     /* Use during testing only */
     router.get("/initialiseSquadLocations", function (req, res) {
-        var departments = ["Fire", "Water", "Earth"];
+        var departments = ["Fire", "Hazmat", "Bomb"];
         variance = 0;
         for (var department of departments) {
-            for (id = 0; id < 5; id++) {
+            for (id = 0; id < 11; id++) {
                 variance += 0.01
                 var departmentDB = Schemas.DepartmentDB({
                     DepartmentID: department,
                     SquadID: id.toString(),
-                    SquadStatus: "Active",
+                    SquadStatus: "Available",
                     Lat: 1.367448 + variance,
                     Lon: 103.803256 + variance,
                     CrisisType: ""
@@ -76,6 +76,24 @@ module.exports = function (io, mongoose, Schemas) {
         res.end(html);
     });
 
+    router.get("/validateUser",function(req,res){
+        var username = req.query.username;
+        var password = req.query.password;
+        var redirect = req.query.redirect;
+        if (username==="root" && password==="toor" && redirect==="/HQ"){
+            res.end("token=thammyHQ");
+        } else if (username==="root" && password==="toor" && redirect==="/DeptFire"){
+            res.end("token=thammyFire");
+        } else if (username==="root" && password==="toor" && redirect==="/DeptHazmat"){
+            res.end("token=thammyHazmat");
+        } else if (username==="root" && password==="toor" && redirect==="/DeptBomb"){
+            res.end("token=thammyBomb");
+        } 
+        else {
+            res.status(401)        // HTTP status 404: NotFound
+            .send('Unauthorized');
+        }
+    })
 
     return router;
 };

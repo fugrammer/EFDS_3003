@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <link rel="stylesheet" href="/css/uikit.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -8,17 +9,31 @@
         function validate() {
             var username = document.forms["loginForm"]["username"].value;
             var password = document.forms["loginForm"]["password"].value;
-            if (username === "root" && password == "toor") {
-                console.log(getParameterByName("redirect"));
-                var d = new Date();
-                d.setTime(d.getTime() + (60 * 60 * 1000)); //1 hr expiry
-                var expires = "expires=" + d.toUTCString();
-                document.cookie = "loginToken=thomasthamHQ;" + expires;
-                location = getParameterByName("redirect");
+            var redirect=getParameterByName("redirect");
+            $.ajax({
+                type: "GET",
+                url: `/validateUser?username=${username}&password=${password}&redirect=${redirect}`,
+                success: function (data) {
+                    var d = new Date();
+                    d.setTime(d.getTime() + (60 * 60 * 1000)); //1 hr expiry
+                    var expires = "expires=" + d.toUTCString();
+                    document.cookie = data +";" + expires;
+                    location = getParameterByName("redirect");
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert("INVALID CREDENTIALS!"); 
+                }    
+            });
+            // if (username === "root" && password == "toor") {
+            //     var d = new Date();
+            //     d.setTime(d.getTime() + (60 * 60 * 1000)); //1 hr expiry
+            //     var expires = "expires=" + d.toUTCString();
+            //     document.cookie = "loginToken=thomasthamHQ;" + expires;
+            //     location = getParameterByName("redirect");
 
-            } else {
-                console.log("wrong credentials");
-            }
+            // } else {
+            // console.log("wrong credentials");
+            // }
             return false;
         }
         function getParameterByName(name, url) {
@@ -32,6 +47,7 @@
         }
     </script>
 </head>
+
 <body>
     <div>
         <div class="uk-grid-medium uk-child-width-expand@s uk-text-center" uk-grid>
@@ -68,4 +84,5 @@
 
     </div>
 </body>
+
 </html>

@@ -10,7 +10,7 @@ module.exports = function (io, mongoose, Schemas) {
     Schema = mongoose.Schema;
 
   router.get("/",function (req, res) {
-    if (!(req.cookies.loginToken==="thomasthamHQ")){
+    if (!(req.cookies.token==="thammyHQ")){
       console.log("no cookie found!");
       res.redirect("/login?redirect=/HQ");
     } 
