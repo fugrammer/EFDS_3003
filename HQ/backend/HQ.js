@@ -98,7 +98,10 @@ module.exports = function (io, mongoose, Schemas) {
     });
 
     crisis.save(function (err, dat) {
-      if (err) console.log("Failed to save crisis log to crisis db");
+      if (err){
+        console.log(err);
+        console.log("Failed to save crisis log to crisis db");
+      }  
     });
 
     io.emit("ReceiveCMOOrder", crisis);
