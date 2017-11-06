@@ -9,8 +9,13 @@ module.exports = function (io, mongoose, Schemas) {
     Schema = mongoose.Schema;
 
   router.get("/", function (req, res) {
+    // if (!req.cookie) {
+    //   res.redirect("/login?redirect=/HQ");
+    // } 
+    //else {
     var html = fs.readFileSync(__dirname + "/../views/index.html");
     res.end(html);
+    //}
   });
 
   /* Provide overall of HQ */

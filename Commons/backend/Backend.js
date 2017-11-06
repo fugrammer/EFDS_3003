@@ -71,5 +71,11 @@ module.exports = function (io, mongoose, Schemas) {
         res.end("success");
     })
 
+    router.get("/login",function(req,res){
+        var html = fs.readFileSync(__dirname + "/login.html");
+        res.end(html);
+    });
+
+
     return router;
 };
