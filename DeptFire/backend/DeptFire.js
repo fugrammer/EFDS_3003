@@ -46,20 +46,21 @@ module.exports = function (io,mongoose,Schemas) {
   });
   /* TO DO */
   /* Order below and receive update from below, and receive order from above and update above */
-  router.post("/orderDept", [urlencodedParser, jsonParser], function (req, res) {
-    var departmentOrder = new Schema({
+  router.post("/OrderDept", [urlencodedParser, jsonParser], function (req, res) {
+    var departmentOrder = Schemas.DepartmentOrder({
       DepartmentID: req.body.DepartmentID,
       NumberOfSquads: req.body.NumberOfSquads,
       Lat: req.body.Lat,
-      Lon: Numbereq.body.Lon,
-      CrisisID: Numbereq.body.CrisisID,
+      Lon: req.body.Lon,
+      CrisisID: req.body.CrisisID,
       Severity: req.body.Severity,
       Comments: req.body.Comments
     });
+    
     departmentOrder.save(function (err, dat) {
       if (err) console.log("Failed to save department order log to department db");
     });
-
+    console.log("ReceiveHQOrder");  
     io.emit("ReceiveHQOrder", departmentOrder);
     res.end("success");
   });

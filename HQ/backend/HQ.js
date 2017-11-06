@@ -139,7 +139,7 @@ module.exports = function (io, mongoose, Schemas) {
     var request = require('request');
     var json = req.body;
     var options = {
-      url: 'localhost:3000/' + department,
+      url: 'localhost:3000/' + department +'/OrderDept',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -149,6 +149,8 @@ module.exports = function (io, mongoose, Schemas) {
     request(options, function (err, res, body) {
       if (res && (res.statusCode === 200 || res.statusCode === 201)) {
         console.log(body);
+      } else{
+        console.log("Sending update to Dept failed");
       }
     });
     res.end("success");

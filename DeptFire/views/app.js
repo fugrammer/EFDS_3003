@@ -18,7 +18,7 @@ angular
       }
     });
     // receives new order
-    socket.on("HQOrders", function(data) {
+    socket.on("ReceiveHQOrder", function(data) {
       //$scope.$apply(function() {
         UIkit.notification({
           message: "New order received!",
@@ -26,13 +26,10 @@ angular
           pos: "top-right",
           timeout: 10000
         });
+      console.log(data);
       $scope.HQOrders.push(data);
       //$scope.newCustomers.push(data.customer);
       // });
-    });
-    socket.on("HQOrderHistory", function(data) {
-        console.log("MESSAGE RECEIVED!");
-        $scope.HQOrders.push(data);
     });
   });
 
