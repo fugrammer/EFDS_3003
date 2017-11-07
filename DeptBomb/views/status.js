@@ -1,24 +1,10 @@
-function updateStatus() {
-  $scope.DeptStatus = {};
-  $.ajax({
-    type: "GET",
-    url: "/DeptBomb/getStatus",
-    success: function (data) {
-      console.log(data);
-      $scope.$apply(function () {
-        $scope.DeptStatus = data;
-      })
-    }
-  });
-}
-
 angular
   .module("DeptBomb")
   .controller("StatusController", function ($scope, socket) {
     $scope.DeptStatus = {};
     $.ajax({
       type: "GET",
-      url: "/HQ/getStatus",
+      url: "/DeptBomb/getStatus",
       success: function (data) {
         console.log(data);
         $scope.$apply(function () {
@@ -28,7 +14,16 @@ angular
       }
     });
     socket.on("UpdateMap", function (data) {
-      updateStatus();
+      $.ajax({
+        type: "GET",
+        url: "/DeptBomb/getStatus",
+        success: function (data) {
+          console.log(data);
+          $scope.$apply(function(){
+            $scope.DeptStatus = data;
+          })
+        }
+      });
     });
   });
 

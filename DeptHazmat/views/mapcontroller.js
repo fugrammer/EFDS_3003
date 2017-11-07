@@ -92,18 +92,7 @@ angular
         }
       });
 
-    // receives new squad locations (maybe)
-    socket.on("ReceiveLocationsUpdates", function (data) {
-      updateMap();
-    });
-
-    // receives new squad locations (maybe)
-    socket.on("ReceiveSquadUpdates", function (data) {
-      updateMap();
-    });
-
-    // receives new crisis locations (maybe)
-    socket.on("ReceiveHQOrder", function (data) {
+    socket.on("UpdateMap", function (data) {
       updateMap();
     });
 

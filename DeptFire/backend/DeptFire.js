@@ -10,7 +10,7 @@ module.exports = function (io, mongoose, Schemas) {
   // Schemas = require("./Schemas");
 
   router.get("/", function (req, res) {
-    if (!(req.cookies.token === "thammyFire")) {
+    if (!(req.cookies.tokenFire === "powerFire")) {
       console.log("no cookie found!");
       res.redirect("/login?redirect=/DeptFire");
     }
@@ -27,10 +27,7 @@ module.exports = function (io, mongoose, Schemas) {
     var filter = { "DepartmentID": "Fire" };
     Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
       for (var _data of data) {
-        departmentStatus[_data.DepartmentID] = departmentStatus[_data.DepartmentID] || { max: 0, available: 0 };
-        departmentStatus[_data.DepartmentID].max += 1;
-        if (_data.SquadStatus === "Available")
-          departmentStatus[_data.DepartmentID].available += 1;
+        departmentStatus[_data.SquadID] = _data.SquadStatus;
       }
       res.json(departmentStatus);
     });
@@ -69,7 +66,7 @@ module.exports = function (io, mongoose, Schemas) {
     });
     console.log("ReceiveHQOrder");
     console.log(departmentOrder);
-    io.emit("ReceiveHQOrder", departmentOrder);
+    io.emit("FireReceiveHQOrder", departmentOrder);
     res.end("success");
   });
 
@@ -131,7 +128,8 @@ module.exports = function (io, mongoose, Schemas) {
     updateDept.save(function (err, dat) {
       if (err) console.log("Failed to save updateHQ log");
     });
-    io.emit("ReceiveSquadUpdates", updateDept);
+    io.emit("ReceiveFireSquadUpdates", updateDept);
+    io.emit("UpdateMap",null);
     res.json(require("../../Commons/js/response").success);
   });
 

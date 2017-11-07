@@ -1,17 +1,3 @@
-function updateStatus() {
-  $scope.DeptStatus = {};
-  $.ajax({
-    type: "GET",
-    url: "/DeptHazmat/getStatus",
-    success: function (data) {
-      console.log(data);
-      $scope.$apply(function () {
-        $scope.HQStatus = data;
-      })
-    }
-  });
-}
-
 angular
   .module("DeptHazmat")
   .controller("StatusController", function ($scope, socket) {
@@ -31,6 +17,15 @@ angular
     });
     // receives new order
     socket.on("UpdateMap", function (data) {
-      updateStatus();
+      $.ajax({
+        type: "GET",
+        url: "/DeptHazmat/getStatus",
+        success: function (data) {
+          console.log(data);
+          $scope.$apply(function(){
+            $scope.DeptStatus = data;
+          })
+        }
+      });
     });
   });

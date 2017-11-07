@@ -10,8 +10,15 @@ module.exports = function (io,mongoose,Schemas) {
     // Schemas = require("./Schemas");
 
   router.get("/", function (req, res) {
-    var html = fs.readFileSync(__dirname + "/../views/index.html");
-    res.end(html);
+    if (!(req.cookies.tokenBomb === "powerBomb")) {
+      console.log("no cookie found!");
+      res.redirect("/login?redirect=/DeptBomb");
+    }
+    else {
+      console.log("cookie accepted!");
+      var html = fs.readFileSync(__dirname + "/../views/index.html");
+      res.end(html);
+    }
   });
 
   /* Provide overall of DeptFire */
@@ -20,10 +27,11 @@ module.exports = function (io,mongoose,Schemas) {
     var filter = {"DepartmentID":"Bomb"};
     Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
       for (var _data of data) {
-        departmentStatus[_data.DepartmentID] = departmentStatus[_data.DepartmentID] || { max: 0, available: 0 };
-        departmentStatus[_data.DepartmentID].max += 1;
-        if (_data.SquadStatus === "Available")
-          departmentStatus[_data.DepartmentID].available += 1;
+        departmentStatus[_data.SquadID] = _data.SquadStatus;
+        //departmentStatus[_data.SquadID].status = departmentStatus[_data.SquadID];
+        // departmentStatus[_data.DepartmentID].max += 1;
+        // if (_data.SquadStatus === "Available")
+        //   departmentStatus[_data.DepartmentID].available += 1;
       }
       res.json(departmentStatus);
     });
@@ -62,7 +70,7 @@ module.exports = function (io,mongoose,Schemas) {
     });
     console.log("bomb ReceiveHQOrder");
     console.log(departmentOrder); 
-    io.emit("ReceiveHQOrder", departmentOrder);
+    io.emit("BombReceiveHQOrder", departmentOrder);
     res.end("success");
   });
 
@@ -124,7 +132,8 @@ module.exports = function (io,mongoose,Schemas) {
     updateDept.save(function (err, dat) {
       if (err) console.log("Failed to save updateHQ log");
     });
-    io.emit("ReceiveSquadUpdates", updateDept);
+    io.emit("ReceiveBombSquadUpdates", updateDept);
+    io.emit("UpdateMap",null);
     res.json(require("../../Commons/js/response").success);
   });
 

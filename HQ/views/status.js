@@ -1,17 +1,3 @@
-function updateStatus() {
-  $scope.HQStatus = {};
-  $.ajax({
-    type: "GET",
-    url: "/HQ/getStatus",
-    success: function (data) {
-      console.log(data);
-      $scope.$apply(function () {
-        $scope.HQStatus = data;
-      })
-    }
-  });
-}
-
 angular
   .module("HQ")
   .controller("StatusController", function ($scope, socket) {
@@ -26,11 +12,19 @@ angular
         $scope.$apply(function () {
           $scope.HQStatus = data;
         })
-
       }
     });
     // receives new order
     socket.on("UpdateMap", function (data) {
-      updateStatus();
+      $.ajax({
+        type: "GET",
+        url: "/HQ/getStatus",
+        success: function (data) {
+          console.log(data);
+          $scope.$apply(function () {
+            $scope.HQStatus = data;
+          })
+        }
+      });
     });
   });

@@ -10,7 +10,7 @@ module.exports = function (io, mongoose, Schemas) {
     Schema = mongoose.Schema;
 
   router.get("/",function (req, res) {
-    if (!(req.cookies.token==="thammyHQ")){
+    if (!(req.cookies.tokenHQ==="powerHQ")){
       console.log("no cookie found!");
       res.redirect("/login?redirect=/HQ");
     } 
@@ -112,8 +112,8 @@ module.exports = function (io, mongoose, Schemas) {
         console.log("Failed to save crisis log to crisis db");
       }  
     });
-
     io.emit("ReceiveCMOOrder", crisis);
+    io.emit("UpdateMap",null);
     res.end("success");
   });
 

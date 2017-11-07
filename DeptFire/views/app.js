@@ -18,7 +18,7 @@ angular
       }
     });
     // receives new order
-    socket.on("ReceiveHQOrder", function(data) {
+    socket.on("FireReceiveHQOrder", function(data) {
       //$scope.$apply(function() {
         UIkit.notification({
           message: "New order received!",
@@ -58,7 +58,7 @@ angular
     });
     console.log("after ajax");
     // receives new updates
-    socket.on("ReceiveSquadUpdates", function(data) {
+    socket.on("ReceiveFireSquadUpdates", function(data) {
         UIkit.notification({
           message: "New updates received!",
           status: "primary",

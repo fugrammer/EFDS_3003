@@ -80,14 +80,14 @@ module.exports = function (io, mongoose, Schemas) {
         var username = req.query.username;
         var password = req.query.password;
         var redirect = req.query.redirect;
-        if (username==="root" && password==="toor2" && redirect==="/HQ"){
-            res.end("token=thammyHQ");
-        } else if (username==="root" && password==="toor2" && redirect==="/DeptFire"){
-            res.end("token=thammyFire");
-        } else if (username==="root" && password==="toor2" && redirect==="/DeptHazmat"){
-            res.end("token=thammyHazmat");
-        } else if (username==="root" && password==="toor2" && redirect==="/DeptBomb"){
-            res.end("token=thammyBomb");
+        if (username==="root" && password==="root" && redirect==="/HQ"){
+            res.end("tokenHQ=powerHQ");
+        } else if (username==="root" && password==="root" && redirect==="/DeptFire"){
+            res.end("tokenFire=powerFire");
+        } else if (username==="root" && password==="root" && redirect==="/DeptHazmat"){
+            res.end("tokenHazmat=powerHazmat");
+        } else if (username==="root" && password==="root" && redirect==="/DeptBomb"){
+            res.end("tokenBomb=powerBomb");
         } 
         else {
             res.status(401)        // HTTP status 404: NotFound
