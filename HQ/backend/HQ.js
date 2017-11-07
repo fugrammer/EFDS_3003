@@ -187,7 +187,7 @@ module.exports = function (io, mongoose, Schemas) {
     var request = require('request');
     var json = req.body;
     var options = {
-      url: 'https://cz3003.herokuapp.com/updatePlan',
+      url: 'http://cz3003.herokuapp.com/cmo/updatePlan',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
