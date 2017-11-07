@@ -34,7 +34,7 @@ angular
   });
 
 // boilerplate
-HQapp.factory("socket", function ($rootScope) {
+DeptFireapp.factory("socket", function ($rootScope) {
   var socket = io();
   return {
     on: function (eventName, callback) {
