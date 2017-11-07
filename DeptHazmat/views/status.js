@@ -1,8 +1,8 @@
 function updateStatus() {
-  $scope.HQStatus = {};
+  $scope.DeptStatus = {};
   $.ajax({
     type: "GET",
-    url: "/HQ/getStatus",
+    url: "/DeptHazmat/getStatus",
     success: function (data) {
       console.log(data);
       $scope.$apply(function () {
@@ -17,14 +17,14 @@ angular
   .controller("StatusController", function ($scope, socket) {
     // get past orders when first opened page
     console.log("hq first opened");
-    $scope.HQStatus = {};
+    $scope.DeptStatus = {};
     $.ajax({
       type: "GET",
-      url: "/HQ/getStatus",
+      url: "/DeptHazmat/getStatus",
       success: function (data) {
         console.log(data);
         $scope.$apply(function () {
-          $scope.HQStatus = data;
+          $scope.DeptStatus = data;
         })
 
       }

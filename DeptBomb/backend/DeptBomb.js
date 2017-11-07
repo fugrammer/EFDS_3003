@@ -32,14 +32,14 @@ module.exports = function (io,mongoose,Schemas) {
 
   /* When app first loaded */
   router.get("/getPastOrders", function (req, res) {
-    var filter = {DepartmentID:"DeptFire"}
+    var filter = {DepartmentID:"DeptBomb"}
     Schemas.DepartmentOrder.find(filter).lean().exec(function (err, data) {
       res.json(data);
     });
   });
 
   router.get("/getPastUpdates", function (req, res) {
-    var filter = {DepartmentID:"DeptFire"}
+    var filter = {DepartmentID:"DeptBomb"}
     Schemas.UpdateDept.find(filter).lean().exec(function (err, data) {
       res.json(data);
     });
@@ -58,9 +58,9 @@ module.exports = function (io,mongoose,Schemas) {
     });
 
     departmentOrder.save(function (err, dat) {
-      if (err) console.log("Failed to save department order log to department db");
+      if (err) console.log("Failed to save departmentBomb order log to department db");
     });
-    console.log("ReceiveHQOrder");
+    console.log("bomb ReceiveHQOrder");
     console.log(departmentOrder); 
     io.emit("ReceiveHQOrder", departmentOrder);
     res.end("success");
@@ -75,7 +75,7 @@ module.exports = function (io,mongoose,Schemas) {
     var request=require('request');
        var json = req.body;
        var options = {
-         url: 'http://localhost:3000/'+department+"/"+squad,
+         url: `http://${host}/`+department+"/"+squad,
          method: 'POST',
          headers: {
            'Content-Type': 'application/json'
@@ -131,6 +131,7 @@ module.exports = function (io,mongoose,Schemas) {
   router.post("/updateHQ", urlencodedParser, function (req, res) {
     console.log("updateHQ");
     console.log(req.body);
+    var host = req.get('host');
     var a = {};
     for (let key of Object.keys(req.body)) {
       if (!req.body[key]) {
@@ -142,7 +143,7 @@ module.exports = function (io,mongoose,Schemas) {
     var request = require('request');
     var json = req.body;
     var options = {
-      url: 'http://localhost:3000/HQ/updateHQ',
+      url: `http://${host}/HQ/updateHQ`,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

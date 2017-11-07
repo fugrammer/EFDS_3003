@@ -1,12 +1,12 @@
 function updateStatus() {
-  $scope.HQStatus = {};
+  $scope.DeptStatus = {};
   $.ajax({
     type: "GET",
-    url: "/HQ/getStatus",
+    url: "/DeptBomb/getStatus",
     success: function (data) {
       console.log(data);
       $scope.$apply(function () {
-        $scope.HQStatus = data;
+        $scope.DeptStatus = data;
       })
     }
   });
@@ -15,21 +15,18 @@ function updateStatus() {
 angular
   .module("HQ")
   .controller("StatusController", function ($scope, socket) {
-    // get past orders when first opened page
-    console.log("hq first opened");
-    $scope.HQStatus = {};
+    $scope.DeptStatus = {};
     $.ajax({
       type: "GET",
       url: "/HQ/getStatus",
       success: function (data) {
         console.log(data);
         $scope.$apply(function () {
-          $scope.HQStatus = data;
+          $scope.DeptStatus = data;
         })
 
       }
     });
-    // receives new order
     socket.on("UpdateMap", function (data) {
       updateStatus();
     });

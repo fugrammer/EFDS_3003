@@ -1,6 +1,6 @@
 var map;
 var markerCluster;
-let GETLOCATIONSURL = "/getLocations?id=Fire"
+let GETLOCATIONSURL = "/getLocations?id=Hazmat"
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -63,7 +63,7 @@ var crisisImage = {
 };
 
 angular
-  .module("DeptFire")
+  .module("DeptHazmat")
   .controller("MapController", function ($scope, socket) {
     // get past orders when first opened page
     //updateMap();
