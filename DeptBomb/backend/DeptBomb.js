@@ -17,7 +17,7 @@ module.exports = function (io,mongoose,Schemas) {
   /* Provide overall of DeptFire */
   router.get("/getStatus", function (req, res) {
     var departmentStatus = {}
-    var filter = {"DepartmentID":"Fire"};
+    var filter = {"DepartmentID":"Bomb"};
     Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
       for (var _data of data) {
         departmentStatus[_data.DepartmentID] = departmentStatus[_data.DepartmentID] || { max: 0, available: 0 };

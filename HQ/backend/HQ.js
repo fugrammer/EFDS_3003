@@ -23,17 +23,18 @@ module.exports = function (io, mongoose, Schemas) {
 
   /* Provide overall of HQ */
   router.get("/getStatus", function (req, res) {
-    var departmentStatus = {}
-    Schemas.DepartmentDB.find().lean().exec(function (err, data) {
+    var departmentStatus = {};
+    var filter = {DepartmentID:{$ne:"Crisis"}};
+    Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
       for (var _data of data) {
         departmentStatus[_data.DepartmentID] = departmentStatus[_data.DepartmentID] || { max: 0, available: 0 };
+        departmentStatus[_data.DepartmentID].DepartmentID = _data.DepartmentID;
         departmentStatus[_data.DepartmentID].max += 1;
         if (_data.SquadStatus === "Available")
           departmentStatus[_data.DepartmentID].available += 1;
       }
       res.json(departmentStatus);
     });
-
   })
 
   /* When app first loaded */

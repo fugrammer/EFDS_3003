@@ -38,6 +38,7 @@
         <li><a href="#">Dept Updates</a></li>
         <li><a href="#">Send Order to Department</a></li>
         <li><a href="#">Send Crisis Update</a></li>
+        <li><a href="#">Status</a></li>
       </ul>
     </div>
     <div class="uk-width-5-6">
@@ -235,6 +236,20 @@
 
 
         </li>
+        <li ng-controller="StatusController">
+          <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
+            <li ng-repeat="(key,value) in HQStatus">
+              <h3 class="uk-accordion-title">Department: {{key}}</h3>
+              <div class="uk-accordion-content">
+                <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
+                  <ul class = "uk-list">
+                    <li>Available: {{value.available}}/{{value.max}}</li>
+                </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
@@ -245,6 +260,7 @@
   <script src="/HQ/views/orderDeptForm.js"></script>
   <script src="/HQ/views/updateCMOForm.js"></script>
   <script src="/HQ/views/mapcontroller.js"></script>
+  <script src="/HQ/views/status.js"></script>
 </body>
 
 </html>
