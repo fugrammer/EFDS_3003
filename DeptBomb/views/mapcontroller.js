@@ -28,6 +28,9 @@ function updateMap() {
 
         if (location.DepartmentID === "Crisis") {
           location.Icon = crisisImage;
+          if (location.SquadStatus==="Cleared"){
+            location.Icon = peaceImage;
+          }
         }
         locations.push(location);
       }
@@ -61,7 +64,17 @@ var crisisImage = {
 
   labelOrigin: new google.maps.Point(22, -10)
 };
+var peaceImage = {
+  url: "/images/peace_icon.png",
+  // This marker is 20 pixels wide by 32 pixels high.
+  size: new google.maps.Size(44, 44),
+  // The origin for this image is (0, 0).
+  origin: new google.maps.Point(0, 0),
+  // The anchor for this image is the base of the flagpole at (0, 32).
+  anchor: new google.maps.Point(22, 30),
 
+  labelOrigin: new google.maps.Point(22, -10)
+};
 angular
   .module("DeptBomb")
   .controller("MapController", function ($scope, socket) {
