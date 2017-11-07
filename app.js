@@ -9,8 +9,8 @@ var express = require("express"),
   Schemas = require("./Commons/backend/Schemas")(mongoose),
   cookieParser = require("cookie-parser");
 
-io.set('transports', ['xhr-polling']);
-io.set('polling duration', 10);  
+// io.set('transports', ['xhr-polling']);
+// io.set('polling duration', 10);  
 io.set('origins', '*:*');
 io.set('match origin protocol', true);
 
