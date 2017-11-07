@@ -1,18 +1,18 @@
-var DeptFireapp = angular.module("DeptFire", ["ngRoute"]);
+var DeptHazmatapp = angular.module("DeptHazmat", ["ngRoute"]);
 angular
-  .module("DeptFire")
+  .module("DeptHazmat")
   .controller("ReceiveHQOrdersController", function($scope, socket) {
     // get past orders when first opened page
-    console.log("DeptFire first opened");
-    $scope.DeptFireOrders = [];
+    console.log("DeptHazmat first opened");
+    $scope.DeptHazmatOrders = [];
     $.ajax({
       type: "GET",
-      url: "/DeptFire/getPastOrders",
+      url: "/DeptHazmat/getPastOrders",
       success: function(data) {
         console.log(data);
         for (let data1 of data){
           $scope.$apply(function(){
-            $scope.DeptFireOrders.push(data1);
+            $scope.DeptHazmatOrders.push(data1);
           })
         }
       }
@@ -27,22 +27,22 @@ angular
           timeout: 10000
         });
       console.log(data);
-      $scope.DeptFireOrders.push(data);
+      $scope.DeptHazmatOrders.push(data);
       //$scope.newCustomers.push(data.customer);
       // });
     });
   });
 
 angular
-  .module("DeptFire")
+  .module("DeptHazmat")
   .controller("ReceiveSquadUpdatesController", function($scope, socket) {
     // get past updates when first opened page
-    console.log("DeptFire first opened");
+    console.log("DeptHazmat first opened");
     $scope.squadUpdates = [];
     console.log("making ajax");
     $.ajax({
       type: "GET",
-      url: "/DeptFire/getPastUpdates",
+      url: "/DeptHazmat/getPastUpdates",
       success: function(data) {
         console.log(data);
         for (let data1 of data){
@@ -72,7 +72,7 @@ angular
   });
 
 // boilerplate
-DeptFireapp.factory("socket", function($rootScope) {
+DeptHazmatapp.factory("socket", function($rootScope) {
   var socket = io();
   return {
     on: function(eventName, callback) {
