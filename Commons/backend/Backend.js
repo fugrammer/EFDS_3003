@@ -28,7 +28,7 @@ module.exports = function (io, mongoose, Schemas) {
             Schemas.DepartmentDB.find().lean().exec(function (err, data) {
                 result = [];
                 for (var _data of data) {
-                    if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {
+                    if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going" ||_data.SquadStatus === "Cleared") {
                         result.push(_data);
                     }
                 }
@@ -40,7 +40,7 @@ module.exports = function (io, mongoose, Schemas) {
             Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
                 result = [];
                 for (var _data of data) {
-                    if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {
+                    if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going"||_data.SquadStatus === "Cleared") {
                         result.push(_data);
                     }
                 }
@@ -80,13 +80,13 @@ module.exports = function (io, mongoose, Schemas) {
         var username = req.query.username;
         var password = req.query.password;
         var redirect = req.query.redirect;
-        if (username==="root" && password==="toor" && redirect==="/HQ"){
+        if (username==="root" && password==="toor2" && redirect==="/HQ"){
             res.end("token=thammyHQ");
-        } else if (username==="root" && password==="toor" && redirect==="/DeptFire"){
+        } else if (username==="root" && password==="toor2" && redirect==="/DeptFire"){
             res.end("token=thammyFire");
-        } else if (username==="root" && password==="toor" && redirect==="/DeptHazmat"){
+        } else if (username==="root" && password==="toor2" && redirect==="/DeptHazmat"){
             res.end("token=thammyHazmat");
-        } else if (username==="root" && password==="toor" && redirect==="/DeptBomb"){
+        } else if (username==="root" && password==="toor2" && redirect==="/DeptBomb"){
             res.end("token=thammyBomb");
         } 
         else {

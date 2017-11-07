@@ -187,18 +187,18 @@ module.exports = function (io, mongoose, Schemas) {
     var request = require('request');
     var json = req.body;
     var options = {
-      url: 'CMOURL',
+      url: 'cz3003.herokuapp.com/updatePlan',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       json: json
     };
-    // request(options, function (err, res, body) {
-    //   if (res && (res.statusCode === 200 || res.statusCode === 201)) {
-    //     console.log(body);
-    //   }
-    // });
+    request(options, function (err, res, body) {
+      if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+        console.log(body);
+      }
+    });
 
     io.emit("UpdateMap");
     res.json(require("../../Commons/js/response").success);
