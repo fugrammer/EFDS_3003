@@ -10,15 +10,15 @@ module.exports = function (io, mongoose, Schemas) {
     Schema = mongoose.Schema;
 
   router.get("/",function (req, res) {
-    if (!(req.cookies.tokenHQ==="powerHQ")){
+    if (req.session && req.session.token==="powerHQ"){
+      console.log("hq cookie accepted!");
+      var html = fs.readFileSync(__dirname + "/../views/index.html");
+      res.end(html);
+    }
+    else{
       console.log("no cookie found!");
       res.redirect("/login?redirect=/HQ");
     } 
-    else {
-      console.log("cookie accepted!");
-    var html = fs.readFileSync(__dirname + "/../views/index.html");
-    res.end(html);
-    }
   });
 
   /* Provide overall of HQ */

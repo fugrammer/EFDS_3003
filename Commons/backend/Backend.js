@@ -81,7 +81,7 @@ module.exports = function (io, mongoose, Schemas) {
         var password = req.query.password;
         var redirect = req.query.redirect;
         if (username==="root" && password==="root" && redirect==="/HQ"){
-            res.end("tokenHQ=powerHQ");
+            req.session.token = "powerHQ";
         } else if (username==="root" && password==="root" && redirect==="/DeptFire"){
             res.end("tokenFire=powerFire");
         } else if (username==="root" && password==="root" && redirect==="/DeptHazmat"){
@@ -92,7 +92,9 @@ module.exports = function (io, mongoose, Schemas) {
         else {
             res.status(401)        // HTTP status 404: NotFound
             .send('Unauthorized');
+            return;
         }
+        res.redirect(redirect);
     })
 
     return router;

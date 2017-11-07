@@ -7,7 +7,8 @@ var express = require("express"),
   io = require('socket.io')(http),
   mongoose = require("mongoose"),
   Schemas = require("./Commons/backend/Schemas")(mongoose),
-  cookieParser = require("cookie-parser");
+  cookieParser = require("cookie-parser"),
+  session = require("client-sessions");
 
 // io.set('transports', ['xhr-polling']);
 // io.set('polling duration', 10);  
@@ -17,6 +18,12 @@ io.set('match origin protocol', true);
 mongoose.connect(
   "mongodb://fugrammer:efds123password@ds151544.mlab.com:51544/efds_database"
 );;
+app.use(session({
+  cookieName: 'session',
+  secret: 'rana(*)(!*_sdsakd!@!@!pokd323pokwpoekwpodm23&^@#&*^dom_string_goes_here',
+  duration: 10 * 1000,
+  activeDuration: 1 * 1000,
+}));
 
 app.use(cookieParser());
 app.use('/HQ/views', express.static(__dirname + '/HQ/views'));
