@@ -9,6 +9,9 @@ var express = require("express"),
   Schemas = require("./Commons/backend/Schemas")(mongoose),
   cookieParser = require("cookie-parser");
 
+io.set('transports', ['xhr-polling']);
+io.set('polling duration', 10);  
+
 mongoose.connect(
   "mongodb://fugrammer:efds123password@ds151544.mlab.com:51544/efds_database"
 );;
