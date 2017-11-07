@@ -1,18 +1,18 @@
-var DeptFireapp = angular.module("DeptFire", ["ngRoute"]);
+var DeptBombapp = angular.module("DeptBomb", ["ngRoute"]);
 angular
-  .module("DeptFire")
+  .module("DeptBomb")
   .controller("ReceiveHQOrdersController", function($scope, socket) {
     // get past orders when first opened page
-    console.log("DeptFire first opened");
-    $scope.DeptFireOrders = [];
+    console.log("DeptBomb first opened");
+    $scope.DeptBombOrders = [];
     $.ajax({
       type: "GET",
-      url: "/DeptFire/getPastOrders",
+      url: "/DeptBomb/getPastOrders",
       success: function(data) {
         console.log(data);
         for (let data1 of data){
           $scope.$apply(function(){
-            $scope.DeptFireOrders.push(data1);
+            $scope.DeptBombOrders.push(data1);
           })
         }
       }
@@ -27,22 +27,22 @@ angular
           timeout: 10000
         });
       console.log(data);
-      $scope.DeptFireOrders.push(data);
+      $scope.DeptBombOrders.push(data);
       //$scope.newCustomers.push(data.customer);
       // });
     });
   });
 
 angular
-  .module("DeptFire")
+  .module("DeptBomb")
   .controller("ReceiveSquadUpdatesController", function($scope, socket) {
     // get past updates when first opened page
-    console.log("DeptFire first opened");
+    console.log("DeptBomb first opened");
     $scope.squadUpdates = [];
     console.log("making ajax");
     $.ajax({
       type: "GET",
-      url: "/DeptFire/getPastUpdates",
+      url: "/DeptBomb/getPastUpdates",
       success: function(data) {
         console.log(data);
         for (let data1 of data){
@@ -72,7 +72,7 @@ angular
   });
 
 // boilerplate
-DeptFireapp.factory("socket", function($rootScope) {
+DeptBombapp.factory("socket", function($rootScope) {
   var socket = io();
   return {
     on: function(eventName, callback) {

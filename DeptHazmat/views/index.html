@@ -1,4 +1,4 @@
-<html ng-app="DeptFire">
+<html ng-app="DeptHazmat">
 
 <head>
   <link rel="stylesheet" href="/css/uikit.min.css" />
@@ -27,7 +27,7 @@
 
 <body>
   <div class="uk-width-1-1 uk-container-center uk-text-center">
-    <h1 class="uk-heading-primary">Fire Department</h1>
+    <h1 class="uk-heading-primary">Hazmat Department</h1>
   </div>
 
   <div class="uk-text-center" uk-grid>
@@ -93,7 +93,7 @@
         </li>
         <li ng-controller="ReceiveHQOrdersController">
           <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
-            <li ng-repeat="order in DeptFireOrders">
+            <li ng-repeat="order in DeptHazmatOrders">
               <h3 class="uk-accordion-title">Crisis ID: {{order.CrisisID}}</h3>
               <div class="uk-accordion-content">
                 <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
@@ -185,7 +185,7 @@
             </form>
         </li>
         <li>
-          <form class="uk-form-horizontal uk-margin-large" id="deptUpdateHQ" action="/DeptFire/updateHQ" method="post">
+          <form class="uk-form-horizontal uk-margin-large" id="deptUpdateHQ" action="/DeptHazmat/updateHQ" method="post">
 
             <div class="uk-margin">
                 <div class="uk-form-label">Crisis ID</div>
@@ -238,9 +238,9 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
   <script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
-  <script src="/DeptFire/views/app.js"></script>
-  <script src="/DeptFire/views/mapcontroller.js"></script>
-  <script src="/DeptFire/views/orderSquadForm.js"></script>
+  <script src="/DeptHazmat/views/app.js"></script>
+  <script src="/DeptHazmat/views/mapcontroller.js"></script>
+  <script src="/DeptHazmat/views/orderSquadForm.js"></script>
 </body>
 
 </html>
