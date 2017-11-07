@@ -11,6 +11,8 @@ var express = require("express"),
 
 io.set('transports', ['xhr-polling']);
 io.set('polling duration', 10);  
+io.set('origins', '*:*');
+io.set('match origin protocol', true);
 
 mongoose.connect(
   "mongodb://fugrammer:efds123password@ds151544.mlab.com:51544/efds_database"
