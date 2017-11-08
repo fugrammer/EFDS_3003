@@ -15,10 +15,10 @@
                 type: "GET",
                 url: `/validateUser?username=${username}&password=${password}&redirect=${redirect}`,
                 success: function (data) {
-                    // var d = new Date();
-                    // d.setTime(d.getTime() + (60 * 60 * 1000)); //1 hr expiry
-                    // var expires = "expires=" + d.toUTCString();
-                    // document.cookie = data +";" + expires;
+                    var d = new Date();
+                    d.setTime(d.getTime() + (60 * 60 * 1000)); //1 hr expiry
+                    var expires = "expires=" + d.toUTCString();
+                    document.cookie = data +";" + expires;
                     location = getParameterByName("redirect");
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
