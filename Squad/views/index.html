@@ -1,7 +1,9 @@
 <html ng-app="Squad">
 
 <head>
-
+    <title>
+        Squad
+    </title>
     <link rel="stylesheet" href="css/uikit.min.css"/>
     <!-- <script src="js/jquery.js"></script> -->
     <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
@@ -22,6 +24,7 @@
                 });
             return result;
         }
+        document.title = findGetParameter('dept') +' Squad ' + findGetParameter('squad');
     </script>
     <style>
         .ng-cloak {
@@ -52,8 +55,8 @@
 <div class="uk-text-center" uk-grid>
     <div class="uk-width-1-6">
         <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
-            <li><a href="#">Send Update</a></li>
-            <li><a href="#">Receive Order</a></li>
+            <li><a href="#">Send Updates</a></li>
+            <li><a href="#">Dept Orders</a></li>
         </ul>
     </div>
     <div class="uk-width-5-6">
@@ -133,7 +136,7 @@
                   <div class="uk-accordion-content">
                     <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
                         <ul class ="uk-list">
-                            <li>Squad ID: {{order.SquadID}}  </li>
+                            <li>Squad ID: {{order.SquadID}} </li>
                             <li>Lat: {{order.Lat}}</li>
                             <li>Lon: {{order.Lon}}</li>
                             <li>Severity: {{order.Severity}}</li>

@@ -26,7 +26,8 @@ module.exports = function (io, mongoose, Schemas) {
         console.log("getting squad past orders");
         var departmentID = req.query.dept;
         var squadID = req.query.squad.toString();
-        var filter = { DepartmentID: "DeptBomb",squadID:squadID}
+        var filter = { DepartmentID: departmentID,SquadID:squadID}
+        console.log(filter);
         Schemas.SquadOrder.find(filter).lean().exec(function (err, data) {
             res.json(data);
         });
@@ -50,7 +51,7 @@ module.exports = function (io, mongoose, Schemas) {
         });
         console.log("squad ReceivedeptOrder");
         console.log(squadOrder);
-        // io.emit("BombReceiveHQOrder", departmentOrder);
+        io.emit("SquadReceiveOrder", squadOrder);
         res.end("success");
     });
 

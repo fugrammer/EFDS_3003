@@ -83,7 +83,7 @@ module.exports = function (io,mongoose,Schemas) {
     var request=require('request');
        var json = req.body;
        var options = {
-         url: `http://${host}/`+department+"/"+squad,
+        url: `http://${host}/Squad/OrderSquad`,
          method: 'POST',
          headers: {
            'Content-Type': 'application/json'
