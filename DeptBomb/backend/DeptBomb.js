@@ -10,15 +10,15 @@ module.exports = function (io,mongoose,Schemas) {
     // Schemas = require("./Schemas");
 
   router.get("/", function (req, res) {
-    if (!(req.cookies.tokenBomb === "powerBomb")) {
-      console.log("no cookie found!");
-      res.redirect("/login?redirect=/DeptBomb");
-    }
-    else {
-      console.log("cookie accepted!");
+    if (req.session && req.session.token==="powerBomb"){
+      console.log("hq cookie accepted!");
       var html = fs.readFileSync(__dirname + "/../views/index.html");
       res.end(html);
     }
+    else{
+      console.log("no cookie found!");
+      res.redirect(`/login?redirect=${req.originalUrl}`);
+    } 
   });
 
   /* Provide overall of DeptFire */

@@ -83,11 +83,17 @@ module.exports = function (io, mongoose, Schemas) {
         if (username==="root" && password==="root" && redirect==="/HQ"){
             req.session.token = "powerHQ";
         } else if (username==="root" && password==="root" && redirect==="/DeptFire"){
-            res.end("tokenFire=powerFire");
+            req.session.token = "powerFire";
+            //res.end("tokenFire=powerFire");
         } else if (username==="root" && password==="root" && redirect==="/DeptHazmat"){
-            res.end("tokenHazmat=powerHazmat");
+            req.session.token = "powerHazmat";
+            //res.end("tokenHazmat=powerHazmat");
         } else if (username==="root" && password==="root" && redirect==="/DeptBomb"){
-            res.end("tokenBomb=powerBomb");
+            req.session.token = "powerBomb";
+            //res.end("tokenBomb=powerBomb");
+        } else if (username==="root" && password==="root" && redirect.startsWith("/squad")){
+            req.session.token = "powerSquad";
+            //res.end("tokenBomb=powerSquad");
         } 
         else {
             res.status(401)        // HTTP status 404: NotFound

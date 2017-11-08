@@ -10,15 +10,15 @@ module.exports = function (io, mongoose, Schemas) {
   // Schemas = require("./Schemas");
 
   router.get("/", function (req, res) {
-    if (!(req.cookies.tokenHazmat === "powerHazmat")) {
-      console.log("no cookie found!");
-      res.redirect("/login?redirect=/DeptHazmat");
-    }
-    else {
-      console.log("cookie accepted!");
+    if (req.session && req.session.token==="powerHazmat"){
+      console.log("hq cookie accepted!");
       var html = fs.readFileSync(__dirname + "/../views/index.html");
       res.end(html);
     }
+    else{
+      console.log("no cookie found!");
+      res.redirect(`/login?redirect=${req.originalUrl}`);
+    } 
   });
 
   /* Provide overall of DeptFire */
