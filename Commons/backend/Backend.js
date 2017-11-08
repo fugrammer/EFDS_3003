@@ -68,11 +68,25 @@ module.exports = function (io, mongoose, Schemas) {
                 departmentDB.save(function (err, data) { });
             }
         }
+    })
+
+    router.get("/resetDB",function(req,res){
+        Schemas.DepartmentDB.remove({});
+        Schemas.Crisis.remove({});
+        Schemas.UpdateDept.remove({});
+        Schemas.UpdateHQ.remove({});
+        Schemas.DepartmentOrder.remove({});
+        Schemas.SquadOrder.remove({});
         res.end("success");
     })
 
     router.get("/login",function(req,res){
         var html = fs.readFileSync(__dirname + "/login.html");
+        res.end(html);
+    });
+
+    router.get("/Squadlogin",function(req,res){
+        var html = fs.readFileSync(__dirname + "/login2.html");
         res.end(html);
     });
 

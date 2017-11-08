@@ -24,7 +24,7 @@ angular
           message: "New order received!",
           status: "primary",
           pos: "top-right",
-          timeout: 10000
+          timeout: 1000000
         });
       console.log(data);
       $scope.DeptHazmatOrders.push(data);
@@ -63,7 +63,7 @@ angular
           message: "New updates received!",
           status: "primary",
           pos: "top-right",
-          timeout: 10000
+          timeout: 1000000
         });
       console.log(`ReceiveSquadUpdates data:`);
       console.log(data);

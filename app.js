@@ -21,7 +21,7 @@ mongoose.connect(
 app.use(session({
   cookieName: 'session',
   secret: 'rana(*)(!*_sdsakd!@!@!pokd323pokwpoekwpodm23&^@#&*^dom_string_goes_here',
-  duration: 10 * 1000,
+  duration: 60 * 60 * 1000,
   activeDuration: 1 * 1000,
 }));
 
