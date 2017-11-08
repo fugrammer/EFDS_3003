@@ -1,10 +1,10 @@
 var Squadapp = angular.module("Squad", ["ngRoute"]);
 angular
     .module("Squad")
-    .controller("ExecutiveOrdersController", function ($scope, socket) {
+    .controller("ReceiveDeptOrdersController", function ($scope, socket) {
         // get past orders when first opened page
         console.log("squad first opened");
-        $scope.orders = [];
+        $scope.DeptOrders = [];
         $.ajax({
             type: "GET",
             url: "/Squad/getOrders",
@@ -12,13 +12,13 @@ angular
                 console.log(data);
                 for (let data1 of data) {
                     $scope.$apply(function () {
-                        $scope.orders.push(data1);
+                        $scope.DeptOrders.push(data1);
                     })
                 }
             }
         });
         // receives new order
-        socket.on("order", function (data) {
+        socket.on("DeptOrder", function (data) {
             //$scope.$apply(function() {
             UIkit.notification({
                 message: "New order received!",
@@ -26,7 +26,7 @@ angular
                 pos: "top-right",
                 timeout: 10000
             });
-            $scope.orders.push(data);
+            $scope.DeptOrders.push(data);
             //$scope.newCustomers.push(data.customer);
             // });
         });
@@ -82,4 +82,3 @@ angular
             });
             e.preventDefault(); // avoid to execute the actual submit of the form.
         })
-
