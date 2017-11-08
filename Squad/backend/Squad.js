@@ -10,15 +10,17 @@ module.exports = function (io, mongoose, Schemas) {
     // Schemas = require("./Schemas");
 
     router.get("/", function (req, res) {
-        if (!(req.cookies.tokenBomb === "powerSquad")) {
-            console.log("no cookie found!");
-            res.redirect(`/login?redirect=${req.originalUrl}`);
-        }
-        else {
-            console.log("cookie accepted!");
-            var html = fs.readFileSync(__dirname + "/../views/index.html");
-            res.end(html);
-        }
+        var html = fs.readFileSync(__dirname + "/../views/index.html");
+        res.end(html);
+        // if (req.session && req.session.token==="powerSquad"){
+        //     console.log("hq cookie accepted!");
+        //     var html = fs.readFileSync(__dirname + "/../views/index.html");
+        //     res.end(html);
+        //   }
+        //   else{
+        //     console.log("no cookie found!");
+        //     res.redirect(`/login?redirect=${req.originalUrl}`);
+        //   } 
     });
 
     /* When app first loaded */
