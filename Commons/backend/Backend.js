@@ -68,6 +68,7 @@ module.exports = function (io, mongoose, Schemas) {
                 departmentDB.save(function (err, data) { });
             }
         }
+        res.end("success");
     })
 
     router.get("/resetDB",function(req,res){
