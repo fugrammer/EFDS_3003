@@ -1,5 +1,5 @@
 $("#orderSQUAD").submit(function(e) {
-    var url = "/DeptFire/OrderSquad"; // the script where you handle the form input.
+    var url = "/DeptHazmat/OrderSquad"; // the script where you handle the form input.
     $.ajax({
       type: "POST",
       url: url,

@@ -69,7 +69,7 @@ module.exports = function (io,mongoose,Schemas) {
       if (err) console.log("Failed to save departmentBomb order log to department db");
     });
     console.log("bomb ReceiveHQOrder");
-    console.log(departmentOrder); 
+    console.log(departmentOrder);
     io.emit("BombReceiveHQOrder", departmentOrder);
     res.end("success");
   });
@@ -102,7 +102,7 @@ module.exports = function (io,mongoose,Schemas) {
   })
 
   router.post("/updateDept", [urlencodedParser, jsonParser], function (req, res) {
-    
+
     var updateDept = Schemas.UpdateDept({
       "DepartmentID":req.body.DepartmentID,
       "SquadID":req.body.SquadID,
@@ -120,7 +120,7 @@ module.exports = function (io,mongoose,Schemas) {
     }
     /* Share DB with DepartmentDB lazy */
     /* Change both to update or create */
-    var query = { DepartmentID: req.body.DepartmentID.replace("Dept",""), SquadID:req.body.SquadID}; 
+    var query = { DepartmentID: req.body.DepartmentID.replace("Dept",""), SquadID:req.body.SquadID};
     Schemas.DepartmentDB.findOneAndUpdate(query, newData, { upsert: true }, function (err, doc) {
       if (err) {
         console.log("Failed to save squad update");
@@ -163,7 +163,7 @@ module.exports = function (io,mongoose,Schemas) {
       if (res && (res.statusCode === 200 || res.statusCode === 201)) {
         console.log(body);
       } else {
-        console.log("Failed to send update to HQ"); 
+        console.log("Failed to send update to HQ");
       }
     });
     res.json(require("../../Commons/js/response").success);
