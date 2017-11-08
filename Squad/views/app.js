@@ -7,7 +7,7 @@ angular
         $scope.DeptOrders = [];
         $.ajax({
             type: "GET",
-            url: "/Squad/getOrders",
+            url: "/Squad/getPastOrders?dept="+findGetParameter(dept)+"&squad="+findGetParameter(squad),
             success: function (data) {
                 console.log(data);
                 for (let data1 of data) {
@@ -31,7 +31,7 @@ angular
             // });
         });
 
-// boilerplate
+        // boilerplate
         Squadapp.factory("socket", function ($rootScope) {
             var socket = io();
             return {

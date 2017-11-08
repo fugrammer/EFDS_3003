@@ -36,7 +36,7 @@ router.use("/HQ", require("./HQ/backend/HQ")(io,mongoose,Schemas));
 router.use("/DeptFire", require("./DeptFire/backend/DeptFire")(io,mongoose,Schemas));
 router.use("/DeptBomb", require("./DeptBomb/backend/DeptBomb")(io,mongoose,Schemas));
 router.use("/DeptHazmat", require("./DeptHazmat/backend/DeptHazmat")(io,mongoose,Schemas));
-router.use("/Squad", require("./Squad/backend/Squad")(io));
+router.use("/Squad", require("./Squad/backend/Squad")(io,mongoose,Schemas));
 router.use("/",require("./Commons/backend/Backend")(io,mongoose,Schemas));
 router.use(function(req,res){
   res.end("There's nothing here...");

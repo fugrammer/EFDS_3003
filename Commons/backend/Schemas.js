@@ -38,6 +38,7 @@ module.exports = function (mongoose) {
     }, { versionKey: false });
 
     var squadOrderSchema = new Schema({
+        DepartmentID:String,
         SquadID: String,
         CrisisID: Number,
         Lat: Number,

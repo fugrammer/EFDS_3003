@@ -10,8 +10,6 @@
     <script src="js/uikit-icons.min.js"></script>
     <script language="JavaScript">
         //        alert("Hi there!")
-
-
         function findGetParameter(parameterName) {
             var result = null,
                 tmp = [];
@@ -24,7 +22,6 @@
                 });
             return result;
         }
-
     </script>
     <style>
         .ng-cloak {
@@ -47,7 +44,9 @@
 
 <body>
 <div class="uk-width-1-1 uk-container-center uk-text-center">
-    <h1 class="uk-heading-primary">Squad</h1>
+    <h1 class="uk-heading-primary">Squad <script type="text/javascript">
+                                    document.write(findGetParameter('dept'))
+                                </script></h1>
 </div>
 
 <div class="uk-text-center" uk-grid>
@@ -57,7 +56,6 @@
             <li><a href="#">Receive Order</a></li>
         </ul>
     </div>
-    <!--&lt;!&ndash;</div>&#45;&#45;-->
     <div class="uk-width-5-6">
         <ul class="uk-switcher nav-class uk-margin">
             <li>
@@ -66,21 +64,9 @@
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-department">Department</label>
                         <div class="uk-form-controls">
-                            <!--<select class="uk-select" id="form-department">-->
-                            <!--<option>Ambulance</option>-->
-                            <!--<option>Bomb Disposal</option>-->
-                            <!--<option>Civil Evacuation</option>-->
-                            <!--<option>Coast Guard</option>-->
-                            <!--<option>Emergency Traffic Control</option>-->
-                            <!--<option>Firefighting</option>-->
-                            <!--<option>HAZMAT</option>-->
-                            <!--<option>Infectious Disease Quarantine</option>-->
-                            <!--<option>Military</option>-->
-                            <!--<option>Search and Rescue</option>-->
-                            <!--</select>-->
                             <div class="uk-text" id=form-department>
                                 <script type="text/javascript">
-                                    document.write(findGetParameter('department'))
+                                    document.write(findGetParameter('dept'))
                                 </script>
                             </div>
                         </div>
