@@ -46,16 +46,12 @@
 </head>
 
 <body>
-<div class="uk-width-1-1 uk-container-center uk-text-center">
-    <h1 class="uk-heading-primary">Squad <script type="text/javascript">
-                                    document.write(findGetParameter('dept'))
-                                </script></h1>
-</div>
-
 <div class="uk-text-center" uk-grid>
     <div class="uk-width-1-6">
         <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
-            <li><a href="#">Send Updates</a></li>
+            <header class="uk-text-center uk-text-large uk-text-primary"><script type="text/javascript">
+                document.write(findGetParameter('dept') + " Squad " + findGetParameter('squad'));</script></header>
+            <li><a href="#" class = "uk-active">Send Updates</a></li>
             <li><a href="#">Dept Orders</a></li>
         </ul>
     </div>
@@ -63,27 +59,6 @@
         <ul class="uk-switcher nav-class uk-margin">
             <li>
                 <form class="uk-form-horizontal uk-margin-large" id="updateDept">
-
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-department">Department</label>
-                        <div class="uk-form-controls">
-                            <div class="uk-text" id=form-department>
-                                <script type="text/javascript">
-                                    document.write(findGetParameter('dept'))
-                                </script>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-squad">Squad ID</label>
-                        <div class="uk-form-controls">
-                            <!--<input class="uk-input" id="squad" type="text" placeholder="Squad number...">-->
-                            <script type="text/javascript" id=form-squad>
-                                document.write(findGetParameter('squad'))
-                            </script>
-                        </div>
-                    </div>
                     <input type="hidden" name="DepartmentID">
                     <input type="hidden" name="SquadID">
 

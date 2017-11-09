@@ -26,6 +26,10 @@ module.exports = function (io, mongoose, Schemas) {
     var departmentStatus = {};
     var filter = {DepartmentID:{$ne:"Crisis"}};
     Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
+      if (!data){
+        res.json({});
+        return;
+      }
       for (var _data of data) {
         departmentStatus[_data.DepartmentID] = departmentStatus[_data.DepartmentID] || { max: 0, available: 0 };
         departmentStatus[_data.DepartmentID].DepartmentID = _data.DepartmentID;
@@ -52,6 +56,10 @@ module.exports = function (io, mongoose, Schemas) {
 
   router.get("/getLocations", function (req, res) {
     Schemas.DepartmentDB.find().lean().exec(function (err, data) {
+      if (!data){
+        res.json([]);
+        return;
+      }
       result = [];
       for (var _data of data) {
         if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going") {

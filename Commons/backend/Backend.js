@@ -26,6 +26,10 @@ module.exports = function (io, mongoose, Schemas) {
         console.log(`Parameters are ${req.query.id}`);
         if (req.query.id=="HQ" || req.query.id == null){
             Schemas.DepartmentDB.find().lean().exec(function (err, data) {
+                if (!data){
+                    res.json([]);
+                    return;
+                }
                 result = [];
                 for (var _data of data) {
                     if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going" ||_data.SquadStatus === "Cleared") {
@@ -38,6 +42,10 @@ module.exports = function (io, mongoose, Schemas) {
         else {
             var filter = {$or:[{DepartmentID:req.query.id},{DepartmentID:"Crisis"}]}
             Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
+                if (!data){
+                    res.json([]);
+                    return;
+                }
                 result = [];
                 for (var _data of data) {
                     if (_data.SquadStatus === "Active" || _data.SquadStatus === "On-going"||_data.SquadStatus === "Cleared") {
