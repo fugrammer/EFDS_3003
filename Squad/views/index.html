@@ -104,7 +104,7 @@
                 </li>
                 <li ng-controller="ReceiveDeptOrdersController">
                     <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
-                        <li ng-repeat="order in DeptOrders">
+                        <li ng-repeat="order in DeptOrders | orderBy: reverse:true">
                             <h3 class="uk-accordion-title">Crisis ID: {{order.CrisisID}}</h3>
                             <div class="uk-accordion-content">
                                 <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
