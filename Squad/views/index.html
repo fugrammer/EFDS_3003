@@ -4,14 +4,11 @@
     <title>
         Squad
     </title>
-    <link rel="stylesheet" href="css/uikit.min.css"/>
-    <!-- <script src="js/jquery.js"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+    <link rel="stylesheet" href="css/uikit.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="js/uikit.min.js"></script>
     <script src="js/uikit-icons.min.js"></script>
     <script language="JavaScript">
-        //        alert("Hi there!")
         function findGetParameter(parameterName) {
             var result = null,
                 tmp = [];
@@ -24,7 +21,7 @@
                 });
             return result;
         }
-        document.title = findGetParameter('dept') +' Squad ' + findGetParameter('squad');
+        document.title = findGetParameter('dept') + ' Squad ' + findGetParameter('squad');
     </script>
     <style>
         .ng-cloak {
@@ -34,109 +31,108 @@
         #map {
             height: 100%;
         }
-
-        /* Optional: Makes the sample page fill the window. */
-        /* html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-          } */
     </style>
 
 </head>
 
 <body>
-<div class="uk-text-center" uk-grid>
-    <div class="uk-width-1-6">
-        <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
-            <header class="uk-text-center uk-text-large uk-text-primary"><script type="text/javascript">
-                document.write(findGetParameter('dept') + " Squad " + findGetParameter('squad'));</script></header>
-            <li><a href="#" class = "uk-active">Send Updates</a></li>
-            <li><a href="#">Dept Orders</a></li>
-        </ul>
-    </div>
-    <div class="uk-width-5-6">
-        <ul class="uk-switcher nav-class uk-margin">
-            <li>
-                <form class="uk-form-horizontal uk-margin-large" id="updateDept">
-                    <input type="hidden" name="DepartmentID">
-                    <input type="hidden" name="SquadID">
+    <div class="uk-text-center" uk-grid>
+        <div class="uk-width-1-6">
+            <header class="uk-text-center uk-text-large uk-text-primary">
+                <script type="text/javascript">
+                    document.write(findGetParameter('dept') + " Squad " + findGetParameter('squad'));</script>
+            </header>
+            <ul class="uk-nav uk-nav-default" uk-switcher="connect: .nav-class">
 
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-long">Longitude</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="form-long"  name="Lon" type="text" placeholder="long...">
-                        </div>
-                    </div>
-
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-latitude">Latitude</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="form-latitude" name="Lat" type="text" placeholder="lat...">
-                        </div>
-                    </div>
-
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-task">Crisis ID</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="form-task" name="CrisisID" type="text" placeholder="Crisis ID...">
-                        </div>
-                    </div>
-
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-status">Task Status</label>
-                        <div class="uk-form-controls">
-                            <select class="uk-select" id="form-status" name="SquadStatus">
-                                <option>On-Going</option>
-                                <option>Completed</option>                        
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-description">Comments</label>
-                        <div class="uk-form-controls">
-                    <textarea class="uk-textarea" id="form-description" rows="5" name="Comments"
-                              placeholder="Task description..."></textarea>
-                        </div>
-                    </div>
-
-                    <div class="uk-margin" uk-margin>
-                        <button class="uk-button uk-button-default">Submit</button>
-                    </div>
-                </form>
-            </li>
-            <li ng-controller="ReceiveDeptOrdersController">
-              <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
-                <li ng-repeat="order in DeptOrders">
-                  <h3 class="uk-accordion-title">Crisis ID: {{order.CrisisID}}</h3>
-                  <div class="uk-accordion-content">
-                    <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
-                        <ul class ="uk-list">
-                            <li>Squad ID: {{order.SquadID}} </li>
-                            <li>Lat: {{order.Lat}}</li>
-                            <li>Lon: {{order.Lon}}</li>
-                            <li>Severity: {{order.Severity}}</li>
-                            <li>Comments: {{order.Comments}}</li>
-                        </ul>
-                    </div>
-                  </div>
+                <li>
+                    <a href="#" class="uk-active">Send Updates</a>
                 </li>
-              </ul>
-            </li>
-        </ul>
+                <li>
+                    <a href="#">Dept Orders</a>
+                </li>
+            </ul>
+        </div>
+        <div class="uk-width-5-6">
+            <ul class="uk-switcher nav-class uk-margin">
+                <li>
+                    <form class="uk-form-horizontal uk-margin-large" id="updateDept">
+                        <input type="hidden" name="DepartmentID">
+                        <input type="hidden" name="SquadID">
 
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-long">Longitude</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="form-long" name="Lon" type="text" placeholder="long...">
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-latitude">Latitude</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="form-latitude" name="Lat" type="text" placeholder="lat...">
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-task">Crisis ID</label>
+                            <div class="uk-form-controls">
+                                <input class="uk-input" id="form-task" name="CrisisID" type="text" placeholder="Crisis ID...">
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-status">Task Status</label>
+                            <div class="uk-form-controls">
+                                <select class="uk-select" id="form-status" name="SquadStatus">
+                                    <option value="Active">Active</option>
+                                    <option value="Available">Available</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" for="form-description">Comments</label>
+                            <div class="uk-form-controls">
+                                <textarea class="uk-textarea" id="form-description" rows="5" name="Comments" placeholder="Task description..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="uk-margin" uk-margin>
+                            <button class="uk-button uk-button-default">Submit</button>
+                        </div>
+                    </form>
+                </li>
+                <li ng-controller="ReceiveDeptOrdersController">
+                    <ul uk-accordion="multiple: true" class="uk-list uk-list-striped">
+                        <li ng-repeat="order in DeptOrders">
+                            <h3 class="uk-accordion-title">Crisis ID: {{order.CrisisID}}</h3>
+                            <div class="uk-accordion-content">
+                                <div class="uk-card uk-card-default uk-card-body uk-width-1-1 uk-margin uk-card-hover">
+                                    <ul class="uk-list">
+                                        <li>Squad ID: {{order.SquadID}} </li>
+                                        <li>Lat: {{order.Lat}}</li>
+                                        <li>Lon: {{order.Lon}}</li>
+                                        <li>Severity: {{order.Severity}}</li>
+                                        <li>Comments: {{order.Comments}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
     </div>
-</div>
-<script>
-    document.getElementsByName('DepartmentID')[0].setAttribute('value', findGetParameter('dept'));
-    document.getElementsByName('SquadID')[0].setAttribute('value', findGetParameter('squad'));
-</script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://code.angularjs.org/1.6.5/angular.js"></script>
-<script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
-<script src="/Squad/views/app.js"></script>
-<script src="/Squad/views/updateDeptForm.js"></script>
+    <script>
+                    document.getElementsByName('DepartmentID')[0].setAttribute('value', findGetParameter('dept'));
+                    document.getElementsByName('SquadID')[0].setAttribute('value', findGetParameter('squad'));
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
+    <script src="https://code.angularjs.org/1.6.5/angular-route.js"></script>
+    <script src="/Squad/views/app.js"></script>
+    <script src="/Squad/views/updateDeptForm.js"></script>
 </body>
 
 </html>

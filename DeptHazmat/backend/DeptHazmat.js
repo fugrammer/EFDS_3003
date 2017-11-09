@@ -26,6 +26,10 @@ module.exports = function (io, mongoose, Schemas) {
     var departmentStatus = {}
     var filter = { "DepartmentID": "Hazmat" };
     Schemas.DepartmentDB.find(filter).lean().exec(function (err, data) {
+      if (!data){
+        res.json([]);
+        return;
+      }
       for (var _data of data) {
         departmentStatus[_data.SquadID] = _data.SquadStatus;
       }
@@ -103,7 +107,7 @@ module.exports = function (io, mongoose, Schemas) {
       "DepartmentID": req.body.DepartmentID,
       "SquadID": req.body.SquadID,
       "CrisisID": req.body.CrisisID,
-      "Status": req.body.Status,
+      "Status": req.body.SquadStatus,
       "Comments": req.body.Comments
     });
 
@@ -112,7 +116,7 @@ module.exports = function (io, mongoose, Schemas) {
     newData = {
       Lat: req.body.Lat,
       Lon: req.body.Lon,
-      SquadStatus: req.body.Status
+      SquadStatus: req.body.SquadStatus
     }
     /* Share DB with DepartmentDB lazy */
     /* Change both to update or create */
