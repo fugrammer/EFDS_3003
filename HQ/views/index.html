@@ -17,11 +17,11 @@
       height: 100%;
     }
     /* Optional: Makes the sample page fill the window. */
-    /* html, body {
+    html, body {
         height: 100%;
         margin: 0;
         padding: 0;
-      } */
+      } 
   </style>
 
 </head>
@@ -30,9 +30,8 @@
   <div class="uk-width-1-1 uk-container-center uk-text-center">
     <h1 class="uk-heading-primary">HQ</h1>
   </div>
-
   <div class="uk-text-center" uk-grid>
-    <div class="uk-width-1-6">
+    <div class="uk-width-auto">
       <ul class="uk-nav uk-nav-default uk-text-left uk-margin-medium-left" uk-switcher="connect: .nav-class">
         <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: world"></span>Map</a></li>
         <li><a href="#">CMO Orders</a></li>
@@ -42,7 +41,7 @@
         <li><a href="#">Status</a></li>
       </ul>
     </div>
-    <div class="uk-width-5-6">
+    <div class="uk-width-expand">
       <ul class="uk-switcher nav-class uk-margin">
         <li ng-controller="MapController as MC">
           <div class="ng-cloak uk-container">
