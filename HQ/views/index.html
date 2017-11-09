@@ -101,7 +101,7 @@
                         <li>Description of Case: {{order.Description}}</li>
                         <li>Lat: {{order.Lat}}</li>
                         <li>Lon: {{order.Lon}}</li>
-                        <li  ng-repeat"suborder in order.SuggestedActions">Suggested Action:
+                        <li ng-repeat="suborder in order.SuggestedActions">Suggested Action:
                           <ul class ="uk-list">
                             <li>Department Type: {{suborder.DepartmentType}}</li>
                             <li>Severity Rating: {{suborder.SeverityRating}}</li>

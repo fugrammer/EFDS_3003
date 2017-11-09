@@ -73,7 +73,8 @@ module.exports = function (io, mongoose, Schemas) {
 
   /* Order below and receive update from below, and receive order from above and update above */
   router.post("/orderHQ", [urlencodedParser, jsonParser], function (req, res) {
-    var crisis = Schemas.Crisis({
+
+    var order = {
       CrisisID: req.body.CrisisID,
       PlanID: req.body.PlanID,
       CrisisType: req.body.CrisisType,
@@ -83,7 +84,9 @@ module.exports = function (io, mongoose, Schemas) {
       Description: req.body.Description,
       SuggestedActions: req.body.SuggestedActions,
       PointOfContact: req.body.PointOfContact
-    });
+    }
+
+    var crisis = Schemas.Crisis(order);
 
     // var crisisLocation = HQSchemas.DepartmentDB({
     //   Lat: req.body.Lat,
@@ -120,7 +123,7 @@ module.exports = function (io, mongoose, Schemas) {
         console.log("Failed to save crisis log to crisis db");
       }  
     });
-    io.emit("ReceiveCMOOrder", crisis);
+    io.emit("ReceiveCMOOrder", order);
     io.emit("UpdateMap",null);
     res.end("success");
   });

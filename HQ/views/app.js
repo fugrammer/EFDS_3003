@@ -19,7 +19,7 @@ angular
     });
     // receives new order
     socket.on("ReceiveCMOOrder", function(data) {
-      //$scope.$apply(function() {
+      console.log(data);
         UIkit.notification({
           message: "New order received!",
           status: "primary",
@@ -27,8 +27,6 @@ angular
           timeout: 10000
         });
       $scope.CMOOrders.push(data);
-      //$scope.newCustomers.push(data.customer);
-      // });
     });
     socket.on("CMOOrderHistory", function(data) {
         console.log("MESSAGE RECEIVED!");
