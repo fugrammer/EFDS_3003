@@ -19,7 +19,8 @@
                     // d.setTime(d.getTime() + (60 * 60 * 1000)); //1 hr expiry
                     // var expires = "expires=" + d.toUTCString();
                     // document.cookie = data +";" + expires;
-                    location = getParameterByName("redirect");
+                    var url = window.location.href;
+                    location =  url.substring(url.indexOf('=')+1);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                     alert("INVALID CREDENTIALS!"); 

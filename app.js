@@ -31,6 +31,7 @@ app.use('/DeptFire/views', express.static(__dirname + '/DeptFire/views'));
 app.use('/DeptBomb/views', express.static(__dirname + '/DeptBomb/views'));
 app.use('/DeptHazmat/views', express.static(__dirname + '/DeptHazmat/views'));
 app.use('/Squad/views', express.static(__dirname + '/Squad/views'));
+app.use('/Commons/backend', express.static(__dirname + '/Commons/backend'));
 
 router.use(express.static("./Commons"))
 router.use("/HQ", require("./HQ/backend/HQ")(io,mongoose,Schemas));

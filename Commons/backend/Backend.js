@@ -54,7 +54,7 @@ module.exports = function (io, mongoose, Schemas) {
         var departments = ["Fire", "Hazmat", "Bomb"];
         variance = 0;
         for (var department of departments) {
-            for (id = 0; id < 11; id++) {
+            for (id = 1; id < 11; id++) {
                 variance += 0.01
                 var departmentDB = Schemas.DepartmentDB({
                     DepartmentID: department,
@@ -80,7 +80,10 @@ module.exports = function (io, mongoose, Schemas) {
         Schemas.SquadOrder.remove({});
         res.end("success");
     })
-
+    router.get("/",function(req,res){
+        var html = fs.readFileSync(__dirname + "/login2.html");
+        res.end(html);
+    })
     router.get("/login",function(req,res){
         var html = fs.readFileSync(__dirname + "/login.html");
         res.end(html);
@@ -97,18 +100,14 @@ module.exports = function (io, mongoose, Schemas) {
         var redirect = req.query.redirect;
         if (username==="root" && password==="root" && redirect==="/HQ"){
             req.session.token = "powerHQ";
-        } else if (username==="root" && password==="root" && redirect==="/DeptFire"){
+        } else if (username==="root" && password==="root" && redirect.toLocaleLowerCase()==="/deptfire"){
             req.session.token = "powerFire";
-            //res.end("tokenFire=powerFire");
-        } else if (username==="root" && password==="root" && redirect==="/DeptHazmat"){
+        } else if (username==="root" && password==="root" && redirect.toLocaleLowerCase()==="/depthazmat"){
             req.session.token = "powerHazmat";
-            //res.end("tokenHazmat=powerHazmat");
-        } else if (username==="root" && password==="root" && redirect==="/DeptBomb"){
+        } else if (username==="root" && password==="root" && redirect.toLocaleLowerCase()==="/deptbomb"){
             req.session.token = "powerBomb";
-            //res.end("tokenBomb=powerBomb");
-        } else if (username==="root" && password==="root" && redirect.startsWith("/squad")){
+        } else if (username==="root" && password==="root" && redirect.toLocaleLowerCase().startsWith("/squad")){
             req.session.token = "powerSquad";
-            //res.end("tokenBomb=powerSquad");
         } 
         else {
             res.status(401)        // HTTP status 404: NotFound
