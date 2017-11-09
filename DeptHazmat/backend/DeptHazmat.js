@@ -43,7 +43,7 @@ module.exports = function (io, mongoose, Schemas) {
   });
 
   router.get("/getPastUpdates", function (req, res) {
-    var filter = { DepartmentID: "DeptHazmat" }
+    var filter = { DepartmentID: "Hazmat" }
     Schemas.UpdateDept.find(filter).lean().exec(function (err, data) {
       res.json(data);
     });

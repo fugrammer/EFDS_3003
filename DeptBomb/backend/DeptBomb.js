@@ -47,7 +47,7 @@ module.exports = function (io,mongoose,Schemas) {
   });
 
   router.get("/getPastUpdates", function (req, res) {
-    var filter = {DepartmentID:"DeptBomb"}
+    var filter = {DepartmentID:"Bomb"}
     Schemas.UpdateDept.find(filter).lean().exec(function (err, data) {
       res.json(data);
     });

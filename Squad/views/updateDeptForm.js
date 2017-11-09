@@ -1,6 +1,5 @@
 $("#updateDept").submit(function(e) {
  var url = "/Squad/updateDept"; // the script where you handle the form input.
-
     $.ajax({
       type: "POST",
       url: url,

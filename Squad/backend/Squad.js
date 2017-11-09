@@ -72,13 +72,14 @@ module.exports = function (io, mongoose, Schemas) {
         var request = require('request');
         var json = req.body;
         var options = {
-            url: `http://${host}/${req.query.dept}/updateDept`,
+            url: `http://${host}/Dept${req.body.DepartmentID}/updateDept`,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(req.body)
         };
+        console.log(`http://${host}/Dept${req.query.DepartmentID}/updateDept`);
         request(options, function (err, res, body) {
             if (res && (res.statusCode === 200 || res.statusCode === 201)) {
                 console.log(body);
